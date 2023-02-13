@@ -4,22 +4,60 @@ import java.sql.*;
 
 public class App
 {
-    public static void main(String[] args)
+    //Connection to MySQL database.
+    private Connection con = null;
+
+    //Method to return and employee by ID
+    public Employee getEmployee(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT emp_no, first_name, last_name "
+                            + "FROM employees "
+                            + "WHERE emp_no = " + ID;
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                Employee emp = new Employee();
+                emp.emp_no = rset.getInt("emp_no");
+                emp.first_name = rset.getString("first_name");
+                emp.last_name = rset.getString("last_name");
+                return emp;
+            }
+            else
+                return null;
+        }
+        catch (Exception e) //catching an exception
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get employee details");
+            return null;
+        }
+    }
+
+    //Connect to the MySQL database.
+    public void connect()
     {
         try
         {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
+        //Catching an exception
         catch (ClassNotFoundException e)
         {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
-        // Connection to the database
-        Connection con = null;
-        int retries = 100;
+        int retries = 10; //setting a counter to decrease
         for (int i = 0; i < retries; ++i)
         {
             System.out.println("Connecting to database...");
@@ -30,9 +68,6 @@ public class App
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
-                // Wait a bit
-                Thread.sleep(10000);
-                // Exit for loop
                 break;
             }
             catch (SQLException sqle)
@@ -45,7 +80,11 @@ public class App
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+    }
 
+    // Disconnect from the MySQL database.
+    public void disconnect()
+    {
         if (con != null)
         {
             try
@@ -53,10 +92,19 @@ public class App
                 // Close connection
                 con.close();
             }
-            catch (Exception e)
+            catch (Exception e) //Catching an exception
             {
                 System.out.println("Error closing connection to database");
             }
         }
     }
+    public static void main(String[] args)
+    {
+            // Create new Application
+            App a = new App();
+            // Connect to database
+            a.connect();
+            // Disconnect from database
+            a.disconnect();
+        }
 }
