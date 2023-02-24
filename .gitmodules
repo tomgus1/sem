@@ -1,3 +1,3 @@
-[submodule "db/test_db"]
-	path = db/test_db
-	url = https://github.com/datacharmer/test_db
+[submodule "world_db"]
+	path = world_db
+	url = https://github.com/tomgus1/world_db/

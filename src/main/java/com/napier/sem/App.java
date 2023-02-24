@@ -7,8 +7,7 @@ public class App {
     //Connection to MySQL database.
     private Connection con = null;
 
-    //Method to return and employee by ID
-    public ArrayList<Employee> getAllSalaries()
+    public City getCity(int ID) //get city information from DB
     {
         try
         {
@@ -16,49 +15,110 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT employees.emp_no, employees.first_name, employees.last_name, salaries.salary "
-                            + "FROM employees, salaries "
-                            + "WHERE employees.emp_no = salaries.emp_no AND salaries.to_date = '9999-01-01' "
-                            + "ORDER BY employees.emp_no ASC";
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
-            ArrayList<Employee> employees = new ArrayList<Employee>();
-            while (rset.next())
+            // Return new employee if valid.
+            // Check one is returned
+            if (rset.next())
             {
-                Employee emp = new Employee();
-                emp.emp_no = rset.getInt("employees.emp_no");
-                emp.first_name = rset.getString("employees.first_name");
-                emp.last_name = rset.getString("employees.last_name");
-                emp.salary = rset.getInt("salaries.salary");
-                employees.add(emp);
+                City city = new City();
+                city.ID = rset.getInt("id");
+                city.name = rset.getString("name");
+                city.countryCode = rset.getString("countrycode");
+                city.district = rset.getString("district");
+                city.population = rset.getInt("population");
+                return city;
             }
-            return employees;
+            else
+                return null;
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get salary details");
+            System.out.println("Failed to get city details");
             return null;
         }
     }
 
-
-    /**
-     * Prints a list of employees.
-     * @param employees The list of employees to print.
-     */
-    public void printSalaries(ArrayList<Employee> employees)
-    {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Emp No", "First Name", "Last Name", "Salary"));
-        // Loop over all employees in the list
-        for (Employee emp : employees)
+    public void displayCity(City city)  { //Display City Information
+        if (city != null)
         {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s %-8s",
-                            emp.emp_no, emp.first_name, emp.last_name, emp.salary);
-            System.out.println(emp_string);
+            System.out.println(
+                    city.ID + " "
+                            + city.name + " "
+                            + city.countryCode + "\n"
+                            + city.district + "\n"
+                            + city.population + "\n"
+                            + city.country + "\n");
+
+        }
+    }
+
+    public Country getCountry(String code) // get Country Info from DB
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2  "
+                            + "FROM country ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Check one is returned
+            if (rset.next())
+            {
+                Country country = new Country();
+                country.code = rset.getString("code");
+                country.name = rset.getString("name");
+                country.continent = rset.getString("continent");
+                country.region = rset.getString("region");
+                country.surfaceArea = rset.getDouble("surfacearea");
+                country.population = rset.getInt("population");
+                country.lifeExpectancy = rset.getDouble("lifeExpectancy");
+                country.gnp = rset.getDouble("gnp");
+                country.gnpOld = rset.getDouble("gnpOld");
+                country.localName = rset.getString("localName");
+                country.governmentForm = rset.getString("governmentForm");
+                country.headOfState = rset.getString("headOfState");
+                country.capital = rset.getInt("capital");
+                country.code2 = rset.getString("code2");
+                return country;
+
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage()); //catch error
+            System.out.println("Failed to get Country details"); // failed load
+            return null;
+        }
+    }
+    public void displayCountry(Country country) //show country info
+    {
+        if (country != null)
+        {
+            System.out.println(
+                    country.code + " "
+                            + country.name + " "
+                            + country.continent + "\n"
+                            + country.region + "\n"
+                            + country.surfaceArea +"\n"
+                            + country.population +"\n"
+                            + country.lifeExpectancy +"\n"
+                            + country.gnp +"\n"
+                            + country.gnpOld + "\n"
+                            + country.localName +"\n"
+                            + country.governmentForm +"\n"
+                            + country.headOfState +"\n"
+                            + country.capital +"\n"
+                            + country.code2);
+
         }
     }
 
@@ -73,7 +133,7 @@ public class App {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
-
+        //connection to the DB
         int retries = 10; //setting a counter to decrease
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
@@ -81,7 +141,7 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/employees?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             } catch (SQLException sqle) {
@@ -113,13 +173,16 @@ public class App {
         // Connect to database
         a.connect();
 
-        // Extract employee salary information
-        ArrayList<Employee> employees = a.getAllSalaries();
+        // Get city
+        City city = a.getCity(3594);
+        // Display results
+        a.displayCity(city);
 
-        // Test the size of the returned data - should be 240124
-        System.out.println(employees.size());
+        // Get country
+        Country country = a.getCountry("RUS");
+        // Display results
+        a.displayCountry(country);
 
-        a.printSalaries(employees);
 
         // Disconnect from database
         a.disconnect();
