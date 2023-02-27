@@ -1,4 +1,4 @@
-# USE CASE: 7 Produce a report on population of people living in cities, and people not living in cities in each continens, region, country
+# USE CASE: 7 Produce a report on population of people living in cities, and people not living in cities in each continent, region, country
 
 ## CHARACTERISTIC INFORMATION
 
@@ -6,8 +6,8 @@
 
 As an employee I want to produce the following reports:
 * The population of people, people living in cities, and people not living in cities in each continent.
-*  The population of people, people living in cities, and people not living in cities in each region.
-*  The population of people, people living in cities, and people not living in cities in each country.
+* The population of people, people living in cities, and people not living in cities in each region.
+* The population of people, people living in cities, and people not living in cities in each country.
 
 ### Scope
 
@@ -43,7 +43,7 @@ A request for a report is sent to an employee.
 ## MAIN SUCCESS SCENARIO
 
 1. Request population information for a given subset of countries
-2. The employee captures the subset (world, the continent, or region) to get population of poeple living and not living in cities
+2. The employee captures the subset (world, the continent, or region) to get population of people living and not living in cities
 3. Employee extracts current population of people living and not living in cities of the given subset.
 4. Employee provides report to management.
 
