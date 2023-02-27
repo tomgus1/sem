@@ -1,41 +1,68 @@
-# USE CASE 10: Get Population Statistics by Continent
+# USE CASE: 8 Produce a report summarising the population by each category: world, continent, region, country, district, city
 
- ## CHARACTERISTIC INFORMATION
+## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
-As a user, I want to be able to retrieve the population of people, people living in cities, and people not living in cities in each continent.
+
+As an employee I want to produce the following reports:
+
+* The population of the world. 
+* The population of a continent. 
+* The population of a region. 
+* The population of a country. 
+* The population of a district. 
+* The population of a city.
 
 ### Scope
-Continents.
+
+Company.
 
 ### Level
+
 Primary task.
 
 ### Preconditions
-The user has access to the system.
+
+* We know the population of the world
+* We know the population of a continent
+* We know the population of a region
+* We know the population of a country
+* We know the population of a district
+* We know the population of a city
+* Database contains current population data.
 
 ### Success End Condition
-The system displays the population statistics of people, people living in cities, and people not living in cities in each continent.
+
+A report is available for employees to provide when requested by management.
 
 ### Failed End Condition
-The system is unable to display the population statistics of people, people living in cities, and people not living in cities in each continent.
+
+No report is produced.
 
 ### Primary Actor
-User.
+
+Management.
 
 ### Trigger
-A request to retrieve the population statistics by continent is received.
 
-### MAIN SUCCESS SCENARIO
-User requests the population statistics by continent.
-System retrieves the population statistics of people, people living in cities, and people not living in cities in each continent.
-System displays the retrieved statistics to the user.
+A request for a report is sent to an employee.
 
-### EXTENSIONS
+## MAIN SUCCESS SCENARIO
+
+1. Request population information
+2. The employee captures the subsets (world, the continent, region, country, district, city) to get population of people living there
+3. Employee extracts current population of people for the particular subset.
+4. Employee provides report to management.
+
+## EXTENSIONS
+
+1. **Subset does not exist**:
+    1. Employee informs management that some data for the subset does not exist.
+
+## SUB-VARIATIONS
+
 None.
 
-### SUB-VARIATIONS
-None.
+## SCHEDULE
 
-### SCHEDULE
-### DUE DATE: Release 1.0
+**DUE DATE**: Release 2.0
