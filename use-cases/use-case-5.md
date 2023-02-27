@@ -1,13 +1,13 @@
-# USE CASE: 7 Produce a report on population of people living in cities, and people not living in cities in each continens, region, country
+# USE CASE: 5 Produce a report on population size, from largest to smallest, for a subset of capital cities.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
 
 As an employee I want to produce the following reports:
-* The population of people, people living in cities, and people not living in cities in each continent.
-*  The population of people, people living in cities, and people not living in cities in each region.
-*  The population of people, people living in cities, and people not living in cities in each country.
+* All the capital cities in the world organised by largest population to smallest.
+* All the capital cities in a continent organised by largest population to smallest.
+* All the capital cities in a region organised by largest to smallest.
 
 ### Scope
 
@@ -19,9 +19,9 @@ Primary task.
 
 ### Preconditions
 
-* We know the population of people living and not living in cities in each continent
-* We know the population of people living and not living in cities in each region
-* We know the population of people living and not living in cities in each country
+* We know the capital cities of the world
+* We know the capital cities of each continent
+* We know the capital cities of each region [Region to be defined]
 * Database contains current population data.
 
 ### Success End Condition
@@ -43,14 +43,15 @@ A request for a report is sent to an employee.
 ## MAIN SUCCESS SCENARIO
 
 1. Request population information for a given subset of countries
-2. The employee captures the subset (world, the continent, or region) to get population of poeple living and not living in cities
-3. Employee extracts current population of people living and not living in cities of the given subset.
+2. The employee captures the subset (world, the continent, or region) to get population of people living and not living in capital cities
+3. Employee extracts current population of people living and not living in capital cities of the given subset.
 4. Employee provides report to management.
 
 ## EXTENSIONS
 
 1. **Subset does not exist**:
-    1. Employee informs management that the city does not exist.
+    1. Employee informs management that the capital city does not exist.
+    2. Employee informs management that the continent or region does not exist.
 
 ## SUB-VARIATIONS
 
