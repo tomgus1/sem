@@ -1,42 +1,61 @@
-## USE CASE 9: Get Top N Populated Capital Cities in a Region
+# USE CASE: 7 Produce a report on population of people living in cities, and people not living in cities in each continens, region, country
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
-As a user, I want to be able to retrieve the top N populated capital cities in a region, where N is provided by me.
 
-## Scope
-Geographic regions.
+As an employee I want to produce the following reports:
+* The population of people, people living in cities, and people not living in cities in each continent.
+*  The population of people, people living in cities, and people not living in cities in each region.
+*  The population of people, people living in cities, and people not living in cities in each country.
 
-## Level
+### Scope
+
+Company.
+
+### Level
+
 Primary task.
 
-## Preconditions
-The user has access to the system and has provided a valid value of N.
+### Preconditions
 
-## Success End Condition
-The system displays the top N populated capital cities in the selected region.
+* We know the population of people living and not living in cities in each continent
+* We know the population of people living and not living in cities in each region
+* We know the population of people living and not living in cities in each country
+* Database contains current population data.
 
-## Failed End Condition
-The system is unable to display the top N populated capital cities in the selected region.
+### Success End Condition
 
-## Primary Actor
-User.
+A report is available for employees to provide when requested by management.
 
-## Trigger
-A request to retrieve the top N populated capital cities in a region is received.
+### Failed End Condition
+
+No report is produced.
+
+### Primary Actor
+
+Management.
+
+### Trigger
+
+A request for a report is sent to an employee.
 
 ## MAIN SUCCESS SCENARIO
-User enters the region for which they want to retrieve the top N populated capital cities.
-User provides a value for N.
-System retrieves the top N populated capital cities in the selected region.
-System displays the retrieved cities to the user.
+
+1. Request population information for a given subset of countries
+2. The employee captures the subset (world, the continent, or region) to get population of poeple living and not living in cities
+3. Employee extracts current population of people living and not living in cities of the given subset.
+4. Employee provides report to management.
 
 ## EXTENSIONS
-The provided region is invalid or does not exist.
-System provides an error message explaining why the cities cannot be retrieved.
-## SUB-VARIATIONS
-None.
-## SCHEDULE
-## DUE DATE: Release 1.0
 
+1. **Subset does not exist**:
+    1. Employee informs management that the city does not exist.
+
+## SUB-VARIATIONS
+
+None.
+
+## SCHEDULE
+
+**DUE DATE**: Release 2.0
