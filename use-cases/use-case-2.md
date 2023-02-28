@@ -1,4 +1,4 @@
-# USE CASE: 2 Produce a report on population size, from largest to smallest, for the top N countries, for a subset of countries
+# USE CASE: 2 Produce a report on population size, for the top N countries, for a subset of countries
 
 ## CHARACTERISTIC INFORMATION
 
@@ -11,7 +11,7 @@ As an employee I want to produce the following reports:
 
 ### Scope
 
-Company.
+Organisation.
 
 ### Level
 
