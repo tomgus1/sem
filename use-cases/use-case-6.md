@@ -1,4 +1,4 @@
-## USE CASE: 7 Produce a report on population size, from largest to smallest, for the top N capital cities, for a subset of capital cities
+# USE CASE: 6 Produce a report on population size, for the top N capital cities, for a subset of capital cities
 
 ## CHARACTERISTIC INFORMATION
 
@@ -11,7 +11,7 @@ As an employee I want to produce the following reports:
 
 ### Scope
 
-Company.
+Organisation.
 
 ### Level
 

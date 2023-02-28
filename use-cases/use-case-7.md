@@ -11,7 +11,7 @@ As an employee I want to produce the following reports:
 
 ### Scope
 
-Company.
+Organisation.
 
 ### Level
 
