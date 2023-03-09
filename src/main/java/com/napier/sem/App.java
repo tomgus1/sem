@@ -7,119 +7,156 @@ public class App {
     //Connection to MySQL database.
     private Connection con = null;
 
-    public City getCity(int ID) //get city information from DB
+    public void queryLanguage()
     {
+        // Holds a list of queried results
+        ArrayList<Language> languages = new ArrayList<Language>();
+
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city ";
             // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
+            ResultSet rset = stmt.executeQuery(
+                    "SELECT countrylanguage.Language AS 'Language', (SUM((country.Population * countrylanguage.Percentage) / 100)) AS 'Population', (((SUM((country.Population * countrylanguage.Percentage) / 100)) * 100) / (SELECT SUM(country.Population) FROM country)) AS 'PercentageGlobal' "
+                            + "FROM countrylanguage, country "
+                            + "WHERE (countrylanguage.Language = 'Chinese' "
+                            + "OR countrylanguage.Language = 'English' "
+                            + "OR countrylanguage.Language = 'Hindi' "
+                            + "OR countrylanguage.Language = 'Spanish' "
+                            + "OR countrylanguage.Language = 'Arabic') "
+                            + "AND countrylanguage.CountryCode = country.Code "
+                            + "GROUP BY countrylanguage.Language "
+                            + "ORDER BY Population DESC ");
+
+            while (rset.next())
             {
-                City city = new City();
-                city.ID = rset.getInt("id");
-                city.name = rset.getString("name");
-                city.countryCode = rset.getString("countrycode");
-                city.district = rset.getString("district");
-                city.population = rset.getInt("population");
-                return city;
+                // Define population
+                Language language = new Language();
+
+                // Extract data from SQL query result
+                language.setLanguage(rset.getString("Language"));
+                language.setPopulation(rset.getLong("Population"));
+                language.setPercentage(rset.getFloat("PercentageGlobal"));
+
+                // Add population to list
+                languages.add(language);
             }
-            else
-                return null;
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
-            return null;
+            System.out.println("Failed to retrieve population details");
         }
-    }
 
-    public void displayCity(City city)  { //Display City Information
-        if (city != null)
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s",
+                "Language", "Speakers", "% Worldwide Speakers"));
+
+        // Loop over all languages in the list
+        for (Language language : languages)
         {
-            System.out.println(
-                    city.ID + " "
-                            + city.name + " "
-                            + city.countryCode + "\n"
-                            + city.district + "\n"
-                            + city.population + "\n"
-                            + city.country + "\n");
+            if (language == null)
+                continue;
 
+            System.out.println(String.format("%-10s %-15s %-20.2f",
+                    language.getLanguage(), language.getPopulation(), language.getPercentage()));
         }
     }
 
-    public Country getCountry(String code) // get Country Info from DB
+    public ArrayList<Population> populationReportQuery(String query)
     {
+        // Holds a list of queried results
+        ArrayList<Population> populations = new ArrayList<Population>();
+
+        // Check if query is null
+        if (query == null || query == "")
+        {
+            System.out.println("Invalid query");
+            return populations;
+        }
+
         try
         {
             // Create an SQL statement
             Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, SurfaceArea, IndepYear, Population, LifeExpectancy, GNP, GNPOld, LocalName, GovernmentForm, HeadOfState, Capital, Code2  "
-                            + "FROM country ";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Check one is returned
-            if (rset.next())
-            {
-                Country country = new Country();
-                country.code = rset.getString("code");
-                country.name = rset.getString("name");
-                country.continent = rset.getString("continent");
-                country.region = rset.getString("region");
-                country.surfaceArea = rset.getDouble("surfacearea");
-                country.population = rset.getInt("population");
-                country.lifeExpectancy = rset.getDouble("lifeExpectancy");
-                country.gnp = rset.getDouble("gnp");
-                country.gnpOld = rset.getDouble("gnpOld");
-                country.localName = rset.getString("localName");
-                country.governmentForm = rset.getString("governmentForm");
-                country.headOfState = rset.getString("headOfState");
-                country.capital = rset.getInt("capital");
-                country.code2 = rset.getString("code2");
-                return country;
 
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(query);
+
+            while (rset.next())
+            {
+                // Define population
+                Population population = new Population();
+
+                // Extract data from SQL query result
+                population.setName(rset.getString("Name"));
+                population.setCountryPopulation(rset.getLong("CountryPopulation"));
+                population.setCityPopulation(rset.getLong("CityPopulation"));
+
+                // Add population to list
+                populations.add(population);
             }
-            else
-                return null;
+
+            // Return global population
+            return populations;
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage()); //catch error
-            System.out.println("Failed to get Country details"); // failed load
+            System.out.println(e.getMessage());
+            System.out.println("Failed to retrieve population info");
             return null;
         }
     }
-    public void displayCountry(Country country) //show country info
+    public static void printPopulationLiving(ArrayList<Population> populations)
     {
-        if (country != null)
-        {
-            System.out.println(
-                    country.code + " "
-                            + country.name + " "
-                            + country.continent + "\n"
-                            + country.region + "\n"
-                            + country.surfaceArea +"\n"
-                            + country.population +"\n"
-                            + country.lifeExpectancy +"\n"
-                            + country.gnp +"\n"
-                            + country.gnpOld + "\n"
-                            + country.localName +"\n"
-                            + country.governmentForm +"\n"
-                            + country.headOfState +"\n"
-                            + country.capital +"\n"
-                            + country.code2);
 
+        if (populations == null || populations.isEmpty())
+        {
+            System.out.println("No populations");
+            return;
         }
+        // Print header
+        System.out.println(String.format("%-40s %-20s %-25s %-25s %-25s %-25s",
+                "Name", "Population", "Living In Cities", "Living Outside Cities", "Living In Cities (%)", "Living In Cities (%)"));
+        // Loop over all populations in the list
+        for (Population population : populations)
+        {
+            if (population == null)
+                continue;
+
+            // Calculations for living data
+            float livingInPercent = ((float)population.getCityPopulation() / (float)population.getCountryPopulation()) * 100;
+            float livingOutPercent = (1 - ((float)population.getCityPopulation() / (float)population.getCountryPopulation())) * 100;
+            long livingOut = population.getCountryPopulation() - population.getCityPopulation();
+
+            System.out.println(String.format("%-40s %-20s %-25s %-25s %-25.2f %-25.2f", population.getName(), population.getCountryPopulation(), population.getCityPopulation(), livingOut, livingInPercent, livingOutPercent));
+        }
+    }
+    public ArrayList<Population> populationReportCountry()
+    {
+        System.out.println("The population of people, people living in cities, and people not living in cities in each country:");
+        return populationReportQuery(
+                "SELECT country.name AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
+                        + "FROM city JOIN country ON city.CountryCode = country.Code "
+                        + "GROUP BY country.name ");
+    }
+    public ArrayList<Population> populationReportContinent()
+    {
+        System.out.println("The population of people, people living in cities, and people not living in cities in each continent:");
+        return populationReportQuery(
+                "SELECT country.continent AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
+                        + "FROM city JOIN country ON city.CountryCode = country.Code "
+                        + "GROUP BY country.continent ");
+    }
+
+    public ArrayList<Population> populationReportRegion()
+    {
+        System.out.println("The population of people, people living in cities, and people not living in cities in each region:");
+        return populationReportQuery(
+                "SELECT country.region AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
+                        + "FROM city JOIN country ON city.CountryCode = country.Code "
+                        + "GROUP BY country.region ");
     }
 
     //Connect to the MySQL database.
@@ -173,18 +210,24 @@ public class App {
         // Connect to database
         a.connect();
 
-        // Get city
-        City city = a.getCity(3594);
-        // Display results
-        a.displayCity(city);
+        // The population of people, people living in cities, and people not living in cities in each country
+        ArrayList<Population> countryPopulations = a.populationReportCountry();
+        a.printPopulationLiving(countryPopulations);
 
-        // Get country
-        Country country = a.getCountry("RUS");
-        // Display results
-        a.displayCountry(country);
+        // The population of people, people living in cities, and people not living in cities in each continent
+        ArrayList<Population> continentPopulations = a.populationReportContinent();
+        a.printPopulationLiving(continentPopulations);
 
+        // The population of people, people living in cities, and people not living in cities in each region
+        ArrayList<Population> regionPopulations = a.populationReportRegion();
+        a.printPopulationLiving(regionPopulations);
+
+
+
+        a.queryLanguage();
 
         // Disconnect from database
         a.disconnect();
     }
+
 }
