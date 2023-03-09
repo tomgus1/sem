@@ -28,7 +28,9 @@ public class City
 
     // Updates the City ID
 
-    public void setId(int id) { this.id = id; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
     //gets the City ID
 
@@ -40,8 +42,9 @@ public class City
     public void setName(String name) {
         this.name = name;
     }
-    //gets city's Name
 
+    //gets city's Name
+    
     public String getName() {
         return name;
     }
@@ -63,8 +66,8 @@ public class City
     public void setDistrict(String district) {
         this.district = district;
     }
-    //gets the City District
 
+    //gets the City District
     public String getDistrict() {
         return district;
     }
@@ -73,8 +76,10 @@ public class City
     public void setPopulation(int population) {
         this.population = population;
     }
+
     // gets the City Population
     public int getPopulation() {
         return population;
     }
+
 }

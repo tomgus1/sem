@@ -5,7 +5,6 @@ public class Population
     public Population() {}
 
     // Population's name
-
     private String name;
 
     // Population County
@@ -16,26 +15,38 @@ public class Population
 
     // Updates the Population Name
 
-
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     //gets the Population Name
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     // Updates the Population of people living in Countries
 
-    public void setCountryPopulation(long populationCountry) { this.populationCountry = populationCountry; }
+    public void setCountryPopulation(long populationCountry) {
+        this.populationCountry = populationCountry;
+    }
 
     //gets the Population of people living in Countries
 
-    public long getCountryPopulation() { return populationCountry; }
+    public long getCountryPopulation() {
+        return populationCountry;
+    }
 
     // Updates the Population of people living in Cities
 
-    public void setCityPopulation(long populationCity) { this.populationCity = populationCity; }
+    public void setCityPopulation(long populationCity) {
+        this.populationCity = populationCity;
+    }
 
     //gets the Population of people living in Cities
 
-    public long getCityPopulation() { return populationCity; }
+    public long getCityPopulation() {
+        return populationCity;
+    }
+
 }

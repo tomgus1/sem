@@ -31,49 +31,74 @@ public class Country
 
     // Updates the Country Code
 
-    public void setCode(String code) { this.code = code; }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     // gets the Country Code
 
-    public String getCode() { return code; }
+    public String getCode() {
+        return code;
+    }
 
     // gets the Country Name
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     //gets the Country Name
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     // Updates the Country Continent
 
-    public void setContinent(String continent) { this.continent = continent; }
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
 
     // gets the Country Continent
 
-    public String getContinent() { return continent; }
+    public String getContinent() {
+        return continent;
+    }
 
     //Updates the Country Region
 
-    public void setRegion(String region) { this.region = region; }
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
     //gets the Country Region
 
-    public String getRegion() { return region; }
+    public String getRegion() {
+        return region;
+    }
 
     // Updates the Country Population
 
-    public void setPopulation(int population) { this.population = population; }
+    public void setPopulation(int population) {
+        this.population = population;
+    }
 
     //gets the Country Population
 
-    public int getPopulation() { return population; }
+    public int getPopulation() {
+        return population;
+    }
 
     // Updates the Country Capital
 
-    public void setCapital(String capital) { this.capital = capital; }
+    public void setCapital(String capital) {
+        this.capital = capital;
+    }
 
     // gets the Country Capital
 
-    public String getCapital() { return capital; }
+    public String getCapital() {
+        return capital;
+    }
+
 }
