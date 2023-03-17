@@ -3,37 +3,29 @@ package com.napier.sem;
 public class City
 {
     // Default constructor
-
     public City() {}
 
     // ID
-
     private int id;
 
     // City's Name
-
     private String name;
 
     // City's Country Code
-
     private String countryCode;
 
     // City's District
-
     private String district;
 
     // City's Population
-
     private int population;
 
     // Updates the City ID
-
     public void setId(int id) {
         this.id = id;
     }
 
     //gets the City ID
-
     public int getId() {
         return id;
     }
@@ -44,25 +36,21 @@ public class City
     }
 
     //gets city's Name
-    
     public String getName() {
         return name;
     }
 
     // Updates the Country Code
-
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
     }
 
     // gets the Country Code of the City
-
     public String getCountryCode() {
         return countryCode;
     }
 
     // Updates the City District
-
     public void setDistrict(String district) {
         this.district = district;
     }
@@ -81,5 +69,4 @@ public class City
     public int getPopulation() {
         return population;
     }
-
 }
