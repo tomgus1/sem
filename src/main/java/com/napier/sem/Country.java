@@ -59,7 +59,7 @@ public class Country
         this.region = region;
     }
 
-    //gets the Country RegionÏ
+    //gets the Country Region
     public String getRegion() {
         return region;
     }
