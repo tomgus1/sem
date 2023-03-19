@@ -2,12 +2,14 @@ version: '3'
 services:
   # Application Dockerfile is in same folder which is .
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
 
   # db is is db folder
   db:
-    image: mysql:8.0.32
-    platform: 'linux/x86_64'
     build: db/.
     command: --default-authentication-plugin=mysql_native_password
     restart: always
