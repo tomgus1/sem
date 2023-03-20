@@ -15,7 +15,8 @@ public class CountriesQueries {
         ArrayList<Country> allCountries = getAllCountries(con);
         ArrayList<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
         ArrayList<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
-        ArrayList<Country> allCountriesLimited = getAllCountriesLimitBy(5, allCountries);
+        ArrayList<Country> allCountriesLimited = getCountriesLimitedBy(5, allCountries);
+        ArrayList<Country> countriesInContinentLimited = getCountriesLimitedBy(3, countriesInContinent);
 
         //columns format
         String format = "%-10s %-50s %-20s %-40s %-15s %-15s";
@@ -40,6 +41,11 @@ public class CountriesQueries {
                 "The top N populated countries in the world where N is provided by the user.",
                 format,
                 allCountriesLimited
+        );
+        printReport(
+                "The top N populated countries in a continent where N is provided by the user.",
+                format,
+                countriesInContinentLimited
         );
     }
 
@@ -114,7 +120,7 @@ public class CountriesQueries {
     }
 
     //use list to get top n countries to be specified by user
-    public static ArrayList<Country> getAllCountriesLimitBy(int limit, ArrayList<Country> countries) {
+    public static ArrayList<Country> getCountriesLimitedBy(int limit, ArrayList<Country> countries) {
         ArrayList<Country> countriesLimited = new ArrayList<>();
 
         for (int i = 0; i < limit; i++) {
