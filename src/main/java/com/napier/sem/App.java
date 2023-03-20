@@ -2,6 +2,8 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+
+import com.napier.sem.Queries.CountriesQueries;
 import com.napier.sem.Queries.LanguagesQuery;
 
 public class App {
@@ -167,6 +169,7 @@ public class App {
         a.printPopulationLiving(regionPopulations);
 
         LanguagesQuery.queryLanguage(con);
+        CountriesQueries.getAllCountryReports(con);
 
         // Disconnect from database
         a.disconnect();
