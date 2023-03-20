@@ -9,15 +9,25 @@ import java.util.ArrayList;
 
 public class CountriesQueries {
 
+    //todo, add user input for continent, region
     public static void getAllCountryReports(Connection con) {
         //get country data
         ArrayList<Country> allCountries = getAllCountries(con);
+        ArrayList<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
+
+        //columns format
+        String format = "%-10s %-50s %-20s %-40s %-15s %-15s";
 
         //report generation
         printReport(
                 "All the countries in the world organised by largest population to smallest",
-                "%-10s %-50s %-20s %-40s %-15s %-15s",
+                format,
                 allCountries);
+        printReport(
+                "All the countries in a continent organised by largest population to smallest.",
+                format,
+                countriesInContinent
+        );
     }
 
     public static ArrayList<Country> getAllCountries(Connection con) {
