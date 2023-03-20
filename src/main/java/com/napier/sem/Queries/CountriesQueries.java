@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 public class CountriesQueries {
 
-    //todo, add user input for continent, region
+    //todo, add user input for continent, region, limit
     public static void getAllCountryReports(Connection con) {
         //get country data
         ArrayList<Country> allCountries = getAllCountries(con);
         ArrayList<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
         ArrayList<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
+        ArrayList<Country> allCountriesLimited = getCountriesLimitedBy(3, allCountries);
+        ArrayList<Country> countriesInContinentLimited = getCountriesLimitedBy(3, countriesInContinent);
+        ArrayList<Country> countriesInRegionLimited = getCountriesLimitedBy(3, countriesInRegion);
 
         //columns format
         String format = "%-10s %-50s %-20s %-40s %-15s %-15s";
@@ -23,7 +26,8 @@ public class CountriesQueries {
         printReport(
                 "All the countries in the world organised by largest population to smallest",
                 format,
-                allCountries);
+                allCountries
+        );
         printReport(
                 "All the countries in a continent organised by largest population to smallest.",
                 format,
@@ -32,7 +36,23 @@ public class CountriesQueries {
         printReport(
                 "All the countries in a region organised by largest population to smallest.",
                 format,
-                countriesInRegion);
+                countriesInRegion
+        );
+        printReport(
+                "The top N populated countries in the world where N is provided by the user.",
+                format,
+                allCountriesLimited
+        );
+        printReport(
+                "The top N populated countries in a continent where N is provided by the user.",
+                format,
+                countriesInContinentLimited
+        );
+        printReport(
+                "The top N populated countries in a region where N is provided by the user.",
+                format,
+                countriesInRegionLimited
+        );
     }
 
     public static ArrayList<Country> getAllCountries(Connection con) {
@@ -103,6 +123,17 @@ public class CountriesQueries {
         }
 
         return countriesInRegion;
+    }
+
+    //use list to get top n countries to be specified by user
+    public static ArrayList<Country> getCountriesLimitedBy(int limit, ArrayList<Country> countries) {
+        ArrayList<Country> countriesLimited = new ArrayList<>();
+
+        for (int i = 0; i < limit; i++) {
+            countriesLimited.add(countries.get(i));
+        }
+
+        return countriesLimited;
     }
 
     //method to print a report from a list
