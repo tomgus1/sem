@@ -5,6 +5,14 @@ public class Country
 {
     // constructor
     public Country() {}
+    public Country(String code, String name, String continent, String region, int population, String capital) {
+        this.code = code;
+        this.name = name;
+        this.continent = continent;
+        this.region = region;
+        this.population = population;
+        this.capital = capital;
+    }
 
     // Country's Code
     private String code;
