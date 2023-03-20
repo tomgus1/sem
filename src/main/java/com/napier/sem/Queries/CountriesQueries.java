@@ -14,6 +14,7 @@ public class CountriesQueries {
         //get country data
         ArrayList<Country> allCountries = getAllCountries(con);
         ArrayList<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
+        ArrayList<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
 
         //columns format
         String format = "%-10s %-50s %-20s %-40s %-15s %-15s";
@@ -28,11 +29,15 @@ public class CountriesQueries {
                 format,
                 countriesInContinent
         );
+        printReport(
+                "All the countries in a region organised by largest population to smallest.",
+                format,
+                countriesInRegion);
     }
 
     public static ArrayList<Country> getAllCountries(Connection con) {
         //create list to hold data
-        ArrayList<Country> allCountries = new ArrayList<Country>();
+        ArrayList<Country> allCountries = new ArrayList<>();
 
         try
         {
@@ -76,7 +81,7 @@ public class CountriesQueries {
 
     //use list of all countries to get countries in a continent
     public static ArrayList<Country> getCountriesInContinent(String continent, ArrayList<Country> countries) {
-        ArrayList<Country> countriesInContinent = new ArrayList<Country>();
+        ArrayList<Country> countriesInContinent = new ArrayList<>();
 
         for (Country country:countries) {
             if (country.getContinent().equals(continent)) {
@@ -89,7 +94,7 @@ public class CountriesQueries {
 
     //use list of all countries to get countries in a region
     public static ArrayList<Country> getCountriesInRegion(String region, ArrayList<Country> countries) {
-        ArrayList<Country> countriesInRegion = new ArrayList<Country>();
+        ArrayList<Country> countriesInRegion = new ArrayList<>();
 
         for (Country country:countries) {
             if (country.getRegion().equals(region)) {
