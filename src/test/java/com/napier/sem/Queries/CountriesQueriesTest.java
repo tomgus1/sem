@@ -56,8 +56,8 @@ public class CountriesQueriesTest {
         String dataString = "Header\n" +
                 "Code       Name                                               Continent            Region                                   Population      Capital        \n" +
                 "GHI        Country3                                           Continent2           Region2                                  30              Capital3       \n" +
-                "MNO        Country5                                           Continent2           Region2                                  15              Capital5       \n" +
                 "ABC        Country1                                           Continent1           Region1                                  20              Capital1       \n" +
+                "MNO        Country5                                           Continent2           Region2                                  15              Capital5       \n" +
                 "DEF        Country2                                           Continent1           Region1                                  10              Capital2       \n" +
                 "JKL        Country4                                           Continent2           Region2                                  5               Capital4       \n";
         assertEquals(dataString, outContent.toString());

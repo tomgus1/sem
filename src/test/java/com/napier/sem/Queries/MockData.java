@@ -13,10 +13,10 @@ public class MockData {
     static Country mockCountry3 = new Country("GHI", "Country3", "Continent2", "Region2", 30, "Capital3");
     static Country mockCountry4 = new Country("JKL", "Country4", "Continent2", "Region2", 5, "Capital4");
     static Country mockCountry5 = new Country("MNO", "Country5", "Continent2", "Region2", 15, "Capital5");
-    static List<Country> allCountriesMock = Arrays.asList(mockCountry3, mockCountry5, mockCountry1, mockCountry2, mockCountry4);
+    static List<Country> allCountriesMock = Arrays.asList(mockCountry3, mockCountry1, mockCountry5, mockCountry2, mockCountry4);
     static List<Country> allContinentsMock = Arrays.asList(mockCountry3, mockCountry5, mockCountry4);
     static List<Country> allRegionsMock = Arrays.asList(mockCountry3, mockCountry5, mockCountry4);
-    static List<Country> topCountriesMock = Arrays.asList(mockCountry3, mockCountry5, mockCountry1);
+    static List<Country> topCountriesMock = Arrays.asList(mockCountry3, mockCountry1, mockCountry5);
 
     public static List<Country> getAllCountries() {
         return allCountriesMock;
