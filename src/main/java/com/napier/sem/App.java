@@ -125,7 +125,7 @@ public class App {
                 // Connect to database
                 System.out.println("Successfully connected");
                 return DriverManager.getConnection("jdbc:mysql://" + location
-                        + "/world?useSSL=false", "root", "example");
+                        + "/world??allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
             } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
