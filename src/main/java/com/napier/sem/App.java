@@ -106,7 +106,7 @@ public class App {
     }
 
     //Connect to the MySQL database.
-    public void connect(String location) {
+    public Connection connect(String location) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -123,10 +123,9 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://" + location
-                        + "/world?useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
-                break;
+                return DriverManager.getConnection("jdbc:mysql://" + location
+                        + "/world?useSSL=false", "root", "example");
             } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + i);
                 System.out.println(sqle.getMessage());
@@ -134,6 +133,7 @@ public class App {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
+        return null;
     }
 
     // Disconnect from the MySQL database.
@@ -155,9 +155,9 @@ public class App {
 
         // Connect to database
         if(args.length < 1){
-            a.connect("localhost:33060");
+            con = a.connect("localhost:33060");
         }else{
-            a.connect(args[0]);
+            con = a.connect(args[0]);
         }
 
         // The population of people, people living in cities, and people not living in cities in each country
