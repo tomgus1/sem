@@ -136,6 +136,18 @@ public class PopulationSubsetCitiesQuery {
         return citiesInContinent;
     }
 
+    //use list to get top n cities
+    public static List<City> getCitiesLimitedBy(int limit, List<City> cities){
+        List<City> citiesLimited = new ArrayList<>();
+
+        for (int i=0; i < limit; i++){
+            citiesLimited.add(cities.get(i));
+        }
+
+        return citiesLimited;
+    }
+
+
     //method to print a report from a list
     public static void printReport(String header, String format, List<City> list) {
         System.out.println(String.format(header));
