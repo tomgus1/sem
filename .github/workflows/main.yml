@@ -44,9 +44,8 @@ jobs:
       - name: CodeCov
         uses: codecov/codecov-action@v2
         with:
-        # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           directory: ./target/site/jacoco
-          files: .coverage
+          files: ./target/site/jacoco/jacoco.xml
           verbose: true # optional (default = false)
   build:
     name: Build and Start Using docker-compose
