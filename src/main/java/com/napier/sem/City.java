@@ -2,7 +2,6 @@ package com.napier.sem;
 
 /**
  * Attributes of a City.
- * @author Scott Langmead, Matthew Wilson, Md Saifullah
  */
 public class City
 {
