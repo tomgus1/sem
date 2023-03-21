@@ -77,7 +77,7 @@ public class CountriesQueriesTest {
     //check that if the limit provided is larger than the subset, the subset will be returned
     @Test
     void expectTopContinentsWithHighLimitToEqualMockData() {
-        assert (CountriesQueries.getCountriesLimitedBy(10, MockData.getSingleContinentMock()))
-                .equals(MockData.getSingleContinentMock());
+        assert (CountriesQueries.getCountriesLimitedBy(10, MockData.getAllContinentsMock()))
+                .equals(MockData.getAllContinentsMock());
     }
 }
