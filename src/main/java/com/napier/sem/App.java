@@ -3,6 +3,7 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 
+import com.napier.sem.Queries.CapitalCitiesQueries;
 import com.napier.sem.Queries.CountriesQueries;
 import com.napier.sem.Queries.LanguagesQuery;
 import com.napier.sem.Queries.PopulationLivingQuery;
@@ -84,6 +85,7 @@ public class App {
 
         LanguagesQuery.queryLanguage(con);
         CountriesQueries.getAllCountryReports(con);
+        CapitalCitiesQueries.getAllCapitalCityReports(con);
 
         // Disconnect from database
         a.disconnect();
