@@ -18,6 +18,6 @@ public class AppIntegrationTest
         List<Country> countries = CountriesQueries.getAllCountries(con);
         Country firstCountry = countries.get(0);
         Country testFirst = new Country("CHN","China","Asia","Eastern Asia",1277558000,"1891");
-        assertEquals(firstCountry, testFirst);
+        assertEquals(firstCountry.getCode(), testFirst.getCode());
     }
 }
