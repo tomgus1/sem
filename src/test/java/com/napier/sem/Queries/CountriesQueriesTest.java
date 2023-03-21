@@ -14,6 +14,7 @@ public class CountriesQueriesTest {
 
     //the list of all the countries (mock data)
     List<Country> countries = MockData.getAllCountries();
+
     private final String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
     private final String lineEnd = os.startsWith("win") ? "\r\n" : "\n";
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -32,15 +33,15 @@ public class CountriesQueriesTest {
     //assert that the method getCountriesInContinent() will equal the mock data
     @Test
     void expectContinentsToEqualMockData() {
-        assert (CountriesQueries.getCountriesInContinent("Continent2", countries))
-                .equals(MockData.getSingleContinentMock());
+        assert(CountriesQueries.getCountriesInContinent("Continent2", countries))
+                .equals(MockData.getAllContinentsMock());
     }
 
     //assert that the method getCountriesInRegion() will equal the mock data
     @Test
     void expectRegionsToEqualMockData() {
-        assert (CountriesQueries.getCountriesInRegion("Region2", countries))
-                .equals(MockData.getSingleRegionMock());
+        assert(CountriesQueries.getCountriesInRegion("Region2", countries))
+                .equals(MockData.getAllRegionsMock());
     }
 
     //assert that the method getCountriesLimitedBy() will equal the mock data
@@ -76,7 +77,7 @@ public class CountriesQueriesTest {
     //check that if the limit provided is larger than the subset, the subset will be returned
     @Test
     void expectTopContinentsWithHighLimitToEqualMockData() {
-        assert (CountriesQueries.getCountriesLimitedBy(10, MockData.getSingleContinentMock()))
-                .equals(MockData.getSingleContinentMock());
+        assert (CountriesQueries.getCountriesLimitedBy(10, MockData.getAllContinentsMock()))
+                .equals(MockData.getAllContinentsMock());
     }
 }

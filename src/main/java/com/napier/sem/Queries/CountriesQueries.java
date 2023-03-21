@@ -130,10 +130,6 @@ public class CountriesQueries {
     public static List<Country> getCountriesLimitedBy(int limit, List<Country> countries) {
         List<Country> countriesLimited = new ArrayList<>();
 
-        if (limit > countries.size()) {
-            limit = countries.size();
-        }
-
         for (int i = 0; i < limit; i++) {
             countriesLimited.add(countries.get(i));
         }
