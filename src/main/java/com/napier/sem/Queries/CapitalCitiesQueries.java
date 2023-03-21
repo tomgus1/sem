@@ -15,7 +15,7 @@ public class CapitalCitiesQueries {
         //get capital city data
         List<City> allCapitalCities = getAllCapitalCities(con);
         List<City> capitalCitiesInContinent = getCapitalCitiesInContinent(con,"Europe", allCapitalCities);
-//        List<City> capitalCitesInRegion = getCapitalCitiesInRegion(con,"Eastern Asia", allCapitalCities);
+        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion(con,"Eastern Asia", allCapitalCities);
 //        List<Country> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(3, allCapitalCities);
 //        List<Country> capitalCitiesInContinentLimited = getCapitalCitiesLimitedBy(3, capitalCitiesInContinent);
 //        List<Country> capitalCitiesInRegionLimited = getCapitalCitiesLimitedBy(3, capitalCitiesInRegion);
@@ -34,11 +34,11 @@ public class CapitalCitiesQueries {
                 format,
                 capitalCitiesInContinent
         );
-//        printReport(
-//                "All the capital cities in a region organised by largest population to smallest.",
-//                format,
-//                capitalCitiesInRegion
-//        );
+        printReport(
+                "All the capital cities in a region organised by largest population to smallest.",
+                format,
+                capitalCitiesInRegion
+        );
 //        printReport(
 //                "The top N populated countries in the world where N is provided by the user.",
 //                format,
@@ -121,6 +121,39 @@ public class CapitalCitiesQueries {
             System.out.println("Failed to retrieve capital city details");
         }
         return capitalCitiesInContinent;
+    }
+
+//    list of all capital cities in a region
+    public static List<City> getCapitalCitiesInRegion(Connection con, String region, List<City> cities) {
+        List<City> capitalCitiesInRegion = new ArrayList<>();
+
+        try {
+
+            // Creates an SQL statement.
+            Statement stmt = con.createStatement();
+
+            // Sends the SQL statement to the database.
+            ResultSet rset = stmt.executeQuery(
+                    "SELECT city.Name, country.Name AS Country, city.Population "
+                            + "FROM country country "
+                            + "LEFT JOIN city city ON country.Capital = city.ID "
+                            + "WHERE country.Region = '"+ region +"' "
+                            + "ORDER BY city.Population DESC ");
+
+            while (rset.next()) {
+                //map query result to capitalCity object and add to list
+                City capitalCity = new City();
+
+                capitalCity.setName(rset.getString("Name"));
+                capitalCity.setPopulation(rset.getInt("Population"));
+
+                capitalCitiesInRegion.add(capitalCity);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to retrieve capital city details");
+        }
+        return capitalCitiesInRegion;
     }
 
     //method to print a report from a list
