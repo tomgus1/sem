@@ -16,7 +16,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Unit Tests
-        run: mvn -Dtest=com.napier.sem.AppTest test
+        run: |
+          mvn -Dtest=com.napier.sem.AppTest test
+          mvn -Dtest=com.napier.sem.Queries.CountriesQueriesTest test
 
   IntegrationTests:
     name: Integration Tests
