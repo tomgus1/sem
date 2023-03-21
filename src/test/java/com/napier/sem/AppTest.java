@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import com.napier.sem.Queries.PopulationLivingQuery;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -12,11 +13,12 @@ public class AppTest {
     static void init()
     {
         app = new App();
+
     }
 
     @Test
     void printPopulationLivingTestNull()
     {
-        app.printPopulationLiving(null);
+        PopulationLivingQuery.printPopulationLiving(null, app.getCon());
     }
 }
