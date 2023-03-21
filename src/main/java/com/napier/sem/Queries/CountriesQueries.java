@@ -6,18 +6,19 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountriesQueries {
 
     //todo, add user input for continent, region, limit
     public static void getAllCountryReports(Connection con) {
         //get country data
-        ArrayList<Country> allCountries = getAllCountries(con);
-        ArrayList<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
-        ArrayList<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
-        ArrayList<Country> allCountriesLimited = getCountriesLimitedBy(3, allCountries);
-        ArrayList<Country> countriesInContinentLimited = getCountriesLimitedBy(3, countriesInContinent);
-        ArrayList<Country> countriesInRegionLimited = getCountriesLimitedBy(3, countriesInRegion);
+        List<Country> allCountries = getAllCountries(con);
+        List<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
+        List<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
+        List<Country> allCountriesLimited = getCountriesLimitedBy(3, allCountries);
+        List<Country> countriesInContinentLimited = getCountriesLimitedBy(3, countriesInContinent);
+        List<Country> countriesInRegionLimited = getCountriesLimitedBy(3, countriesInRegion);
 
         //columns format
         String format = "%-10s %-50s %-20s %-40s %-15s %-15s";
@@ -55,9 +56,9 @@ public class CountriesQueries {
         );
     }
 
-    public static ArrayList<Country> getAllCountries(Connection con) {
+    public static List<Country> getAllCountries(Connection con) {
         //create list to hold data
-        ArrayList<Country> allCountries = new ArrayList<>();
+        List<Country> allCountries = new ArrayList<>();
 
         try
         {
@@ -100,8 +101,8 @@ public class CountriesQueries {
     }
 
     //use list of all countries to get countries in a continent
-    public static ArrayList<Country> getCountriesInContinent(String continent, ArrayList<Country> countries) {
-        ArrayList<Country> countriesInContinent = new ArrayList<>();
+    public static List<Country> getCountriesInContinent(String continent, List<Country> countries) {
+        List<Country> countriesInContinent = new ArrayList<>();
 
         for (Country country:countries) {
             if (country.getContinent().equals(continent)) {
@@ -113,8 +114,8 @@ public class CountriesQueries {
     }
 
     //use list of all countries to get countries in a region
-    public static ArrayList<Country> getCountriesInRegion(String region, ArrayList<Country> countries) {
-        ArrayList<Country> countriesInRegion = new ArrayList<>();
+    public static List<Country> getCountriesInRegion(String region, List<Country> countries) {
+        List<Country> countriesInRegion = new ArrayList<>();
 
         for (Country country:countries) {
             if (country.getRegion().equals(region)) {
@@ -126,8 +127,8 @@ public class CountriesQueries {
     }
 
     //use list to get top n countries to be specified by user
-    public static ArrayList<Country> getCountriesLimitedBy(int limit, ArrayList<Country> countries) {
-        ArrayList<Country> countriesLimited = new ArrayList<>();
+    public static List<Country> getCountriesLimitedBy(int limit, List<Country> countries) {
+        List<Country> countriesLimited = new ArrayList<>();
 
         for (int i = 0; i < limit; i++) {
             countriesLimited.add(countries.get(i));
@@ -137,7 +138,7 @@ public class CountriesQueries {
     }
 
     //method to print a report from a list
-    public static void printReport(String header, String format, ArrayList<Country> list) {
+    public static void printReport(String header, String format, List<Country> list) {
         System.out.println(String.format(header));
 
         System.out.println(String.format(format,
