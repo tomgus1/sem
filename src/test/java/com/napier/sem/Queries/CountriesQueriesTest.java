@@ -6,6 +6,7 @@ import org.junit.jupiter.api.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,6 +14,8 @@ public class CountriesQueriesTest {
 
     //the list of all the countries (mock data)
     List<Country> countries = MockData.getAllCountries();
+    private final String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
+    private final String lineEnd = os.startsWith("win")? "\r\n": "\n";
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -51,13 +54,13 @@ public class CountriesQueriesTest {
     @Test
     void expectReportToEqualMockData() {
         CountriesQueries.printReport("Header", "%-10s %-50s %-20s %-40s %-15s %-15s", countries);
-        String dataString = "Header\n" +
-                "Code       Name                                               Continent            Region                                   Population      Capital        \n" +
-                "GHI        Country3                                           Continent2           Region2                                  30              Capital3       \n" +
-                "ABC        Country1                                           Continent1           Region1                                  20              Capital1       \n" +
-                "MNO        Country5                                           Continent2           Region2                                  15              Capital5       \n" +
-                "DEF        Country2                                           Continent1           Region1                                  10              Capital2       \n" +
-                "JKL        Country4                                           Continent2           Region2                                  5               Capital4       \n";
+        String dataString = "Header"+lineEnd +
+                "Code       Name                                               Continent            Region                                   Population      Capital        "+lineEnd +
+                "GHI        Country3                                           Continent2           Region2                                  30              Capital3       "+lineEnd +
+                "ABC        Country1                                           Continent1           Region1                                  20              Capital1       "+lineEnd +
+                "MNO        Country5                                           Continent2           Region2                                  15              Capital5       "+lineEnd +
+                "DEF        Country2                                           Continent1           Region1                                  10              Capital2       "+lineEnd +
+                "JKL        Country4                                           Continent2           Region2                                  5               Capital4       "+lineEnd;
         assertEquals(dataString, outContent.toString());
     }
 
@@ -65,8 +68,8 @@ public class CountriesQueriesTest {
     @Test
     void expectReportToBeBlank() {
         CountriesQueries.printReport("Header", "%-10s %-50s %-20s %-40s %-15s %-15s", CountriesQueries.getCountriesInContinent("Random", this.countries));
-        String dataString = "Header\n" +
-                "Code       Name                                               Continent            Region                                   Population      Capital        \n";
+        String dataString = "Header"+lineEnd +
+                "Code       Name                                               Continent            Region                                   Population      Capital        "+lineEnd;
         assertEquals(dataString, outContent.toString());
     }
 
