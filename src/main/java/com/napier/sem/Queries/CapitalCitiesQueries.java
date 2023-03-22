@@ -12,7 +12,9 @@ public class CapitalCitiesQueries {
 
     public static void getAllCapitalCityReports(Connection con) {
 
-        //get capital city data
+        /**
+         * get capital city data
+         */
         List<City> allCapitalCities = getAllCapitalCities(con);
         List<City> capitalCitiesInContinent = getCapitalCitiesInContinent(con,"Europe", allCapitalCities);
         List<City> capitalCitiesInRegion = getCapitalCitiesInRegion(con,"Eastern Asia", allCapitalCities);
@@ -20,10 +22,14 @@ public class CapitalCitiesQueries {
         List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(con,3, "Europe", capitalCitiesInContinent);
         List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(con, 3, "Eastern Asia", capitalCitiesInRegion);
 
-        //columns format
+        /**
+         * columns format
+         */
         String format = "%-40s %-20s";
 
-        //report generation
+        /**
+         * report generation
+         */
         printReport(
                 "All the capital cities in the world organised by largest population to smallest",
                 format,
@@ -57,15 +63,21 @@ public class CapitalCitiesQueries {
     }
 
     public static List<City> getAllCapitalCities(Connection con) {
-        //create list to hold data
+        /**
+         * create list to hold data
+         */
         List<City> allCapitalCities = new ArrayList<>();
         {
 
             try {
-                // Creates an SQL statement.
+                /**
+                 * creates an SQL statement
+                 */
                 Statement stmt = con.createStatement();
 
-                // Sends the SQL statement to the database.
+                /**
+                 * sends SQL statement to the database
+                 */
                 ResultSet rset = stmt.executeQuery(
                         "SELECT city.Name, country.Name AS Country, city.Population "
                         + "FROM country country "
@@ -73,7 +85,9 @@ public class CapitalCitiesQueries {
                         + "ORDER BY city.Population DESC ");
 
                 while (rset.next()) {
-                    //map query result to capitalCity object and add to list
+                    /**
+                     *map query result to capitalCity object and add to list
+                     */
                     City capitalCity = new City();
 
                     capitalCity.setName(rset.getString("Name"));
@@ -90,16 +104,22 @@ public class CapitalCitiesQueries {
         }
     }
 
-    //list all capital cities in a continent
+    /**
+     * list all capital cities in a continent
+     */
     public static List<City> getCapitalCitiesInContinent(Connection con, String continent, List<City> cities) {
         List<City> capitalCitiesInContinent = new ArrayList<>();
 
         try {
 
-            // Creates an SQL statement.
+            /**
+             * creates an SQL statement
+             */
             Statement stmt = con.createStatement();
 
-            // Sends the SQL statement to the database.
+            /**
+             * sends SQL statement to the database
+             */
             ResultSet rset = stmt.executeQuery(
                         "SELECT city.Name, country.Name AS Country, city.Population "
                                 + "FROM country country "
@@ -108,7 +128,9 @@ public class CapitalCitiesQueries {
                                 + "ORDER BY city.Population DESC ");
 
             while (rset.next()) {
-                //map query result to capitalCity object and add to list
+                /**
+                 * map query result to capitalCity object and add to list
+                 */
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
@@ -123,16 +145,22 @@ public class CapitalCitiesQueries {
         return capitalCitiesInContinent;
     }
 
-//    list of all capital cities in a region
+    /**
+     * list of all capital cities in a region
+     */
     public static List<City> getCapitalCitiesInRegion(Connection con, String region, List<City> cities) {
         List<City> capitalCitiesInRegion = new ArrayList<>();
 
         try {
 
-            // Creates an SQL statement.
+            /**
+             * creates an SQL statement
+             */
             Statement stmt = con.createStatement();
 
-            // Sends the SQL statement to the database.
+            /**
+             * sends SQL statement to the database
+             */
             ResultSet rset = stmt.executeQuery(
                     "SELECT city.Name, country.Name AS Country, city.Population "
                             + "FROM country country "
@@ -141,7 +169,9 @@ public class CapitalCitiesQueries {
                             + "ORDER BY city.Population DESC ");
 
             while (rset.next()) {
-                //map query result to capitalCity object and add to list
+                /**
+                 * map query result to capitalCity object and add to list
+                 */
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
@@ -156,7 +186,9 @@ public class CapitalCitiesQueries {
         return capitalCitiesInRegion;
     }
 
-    //list top n capital cities in the world
+    /**
+     * list top n capital cities in the world
+     */
     public static List<City> getCapitalCitiesLimitedBy(Connection con, int n, List<City> cities) {
         List<City> capitalCitiesLimited = new ArrayList<>();
 
@@ -165,10 +197,14 @@ public class CapitalCitiesQueries {
         }
 
         try {
-            // Creates an SQL statement.
+            /**
+             * creates an SQL statement
+             */
             Statement stmt = con.createStatement();
 
-            // Sends the SQL statement to the database.
+            /**
+             * sends the SQL statement to the database
+             */
             ResultSet rset = stmt.executeQuery(
                     "SELECT city.Name, country.Name AS Country, city.Population "
                             + "FROM country country "
@@ -177,7 +213,9 @@ public class CapitalCitiesQueries {
                             + "LIMIT " + n + " ");
 
             while (rset.next()) {
-                //map query result to capitalCity object and add to list
+                /**
+                 * map query result to capitalCity object and add to list
+                 */
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
@@ -192,7 +230,9 @@ public class CapitalCitiesQueries {
         return capitalCitiesLimited;
     }
 
-    //list top n capital cities in a continent
+    /**
+     * list top n capital cities in a continent
+     */
     public static List<City> getCapitalCitiesInContinentLimitedBy(Connection con, int n, String continent, List<City> cities) {
         List<City> capitalCitiesInContinentLimited = new ArrayList<>();
 
@@ -201,10 +241,14 @@ public class CapitalCitiesQueries {
         }
 
         try {
-            // Creates an SQL statement.
+            /**
+             * creates an SQL statement
+             */
             Statement stmt = con.createStatement();
 
-            // Sends the SQL statement to the database.
+            /**
+             * sends the SQL statement to the database
+             */
             ResultSet rset = stmt.executeQuery(
                     "SELECT city.Name, country.Name AS Country, city.Population "
                             + "FROM country country "
@@ -214,7 +258,9 @@ public class CapitalCitiesQueries {
                             + "LIMIT " + n + ";" );
 
             while (rset.next()) {
-                //map query result to capitalCity object and add to list
+                /**
+                 * map query result to capitalCity object and add to list
+                 */
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
@@ -229,7 +275,9 @@ public class CapitalCitiesQueries {
         return capitalCitiesInContinentLimited;
     }
 
-    //list top n capital cities in a region
+    /**
+     * list top n capital cities in a region
+     */
     public static List<City> getCapitalCitiesInRegionLimitedBy(Connection con, int n, String region, List<City> cities) {
         List<City> capitalCitiesInRegionLimited = new ArrayList<>();
 
@@ -238,10 +286,14 @@ public class CapitalCitiesQueries {
         }
 
         try {
-            // Creates an SQL statement.
+            /**
+             * creates an SQL statement
+             */
             Statement stmt = con.createStatement();
 
-            // Sends the SQL statement to the database.
+            /**
+             * sends SQL statement to the database
+             */
             ResultSet rset = stmt.executeQuery(
                     "SELECT city.Name, country.Name AS Country, city.Population "
                             + "FROM country country "
@@ -251,7 +303,9 @@ public class CapitalCitiesQueries {
                             + "LIMIT " + n + ";" );
 
             while (rset.next()) {
-                //map query result to capitalCity object and add to list
+                /**
+                 * map query result to capitalCity object and add to list
+                 */
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
@@ -266,14 +320,18 @@ public class CapitalCitiesQueries {
         return capitalCitiesInRegionLimited;
     }
 
-    //method to print a report from a list
+    /**
+     * method to print a report from a list
+     */
     public static void printReport(String header, String format, List<City> list) {
         System.out.println(String.format(header));
 
         System.out.println(String.format(format,
                 "Name", "Population"));
 
-        // Loop over all capital cities in the list
+        /**
+         * create a loop to print all capital cities in the list
+         */
         for (City capital : list)
         {
             if (capital == null) {
