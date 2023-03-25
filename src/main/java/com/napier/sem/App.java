@@ -72,7 +72,7 @@ public class App {
 
         PopulationLivingQuery.populationLivingReportQuery(con);
 
-        LanguagesQuery.queryLanguage(con);
+        LanguagesQuery.LanguagesReport(con);
 
         CountriesQueries.getAllCountryReports(con);
 
