@@ -85,9 +85,8 @@ public class PopulationLivingQuery {
             Statement stmt = con.createStatement();
 
             // Execute SQL statement
-            ResultSet rset = stmt.executeQuery("SELECT country.continent AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
-                    + "FROM city JOIN country ON city.CountryCode = country.Code "
-                    + "GROUP BY country.name ");
+            ResultSet rset = stmt.executeQuery( "SELECT country.continent AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
+                    + "FROM city JOIN country ON city.CountryCode = country.Code ");
 
             while (rset.next())
             {
@@ -125,7 +124,7 @@ public class PopulationLivingQuery {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery("SELECT country.region AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
                     + "FROM city JOIN country ON city.CountryCode = country.Code "
-                    + "GROUP BY country.name ");
+                    + "GROUP BY country.region ");
 
             while (rset.next())
             {
@@ -157,6 +156,7 @@ public class PopulationLivingQuery {
         System.out.println(String.format(format,
                 "Name", "Population", "Living In Cities", "Living Outside Cities", "Living In Cities (%)", "Living In Cities (%)"));
 
+
         // Loop over all countries in the list
         for (Population population : list)
         {
@@ -169,7 +169,13 @@ public class PopulationLivingQuery {
             float livingOutPercent = (1 - ((float)population.getCityPopulation() / (float)population.getCountryPopulation())) * 100;
             long livingOut = population.getCountryPopulation() - population.getCityPopulation();
 
-            System.out.println(String.format(format,population.getName(), population.getCountryPopulation(), population.getCityPopulation(), livingOut, livingInPercent, livingOutPercent));
+            System.out.println(String.format(format,
+                    population.getName(),
+                    population.getCountryPopulation(),
+                    population.getCityPopulation(),
+                    livingOut,
+                    livingInPercent,
+                    livingOutPercent));
         }
     }
 }
