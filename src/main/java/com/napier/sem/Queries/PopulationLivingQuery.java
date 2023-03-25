@@ -86,7 +86,8 @@ public class PopulationLivingQuery {
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery( "SELECT country.continent AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
-                    + "FROM city JOIN country ON city.CountryCode = country.Code ");
+                    + "FROM city JOIN country ON city.CountryCode = country.Code " +
+                    "GROUP BY country.continent");
 
             while (rset.next())
             {
