@@ -14,7 +14,7 @@ public class LanguagesQuery {
         List<Language> speakersReport = getLanguages(con);
         String format =  "%-10s %-15s %-20s";
 
-        printReport("Languages Spoken by top 6", format, speakersReport);
+        printReport("Languages Spoken by top 5", format, speakersReport);
     }
 
     public static List<Language> getLanguages(Connection con) {
