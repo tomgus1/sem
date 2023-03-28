@@ -2,12 +2,12 @@
 
 ---
 ### Resources
-| Resource name      |                                          Link                                           |
-|--------------------|:---------------------------------------------------------------------------------------:|
-| Kanban board       |   <a href="https://zube.io/napier-258/hr-system/w/workspace-1/kanban">Click here</a>    |
-| Sprint Board       |   <a href="https://zube.io/napier-258/hr-system/w/workspace-1/sprints">Click here</a>   |
-| Lab material       |     <a href="https://github.com/Kevin-Sim/SET08103/tree/master/labs">Click here</a>     |
-| Assessment material |  <a href="https://github.com/Kevin-Sim/SET08103/tree/master/assessment">Click here</a>  | 
+| Resource name      |                                                 Link                                                  |
+|--------------------|:-----------------------------------------------------------------------------------------------------:|
+| Kanban board       |   <a href="https://zube.io/napier-258/world-population-system/w/workspace-1/kanban">Click here</a>    |
+| Sprint Board       | <a href="https://zube.io/napier-258/world-population-system/w/workspace-1/sprintboard">Click here</a> |
+| Lab material       |            <a href="https://github.com/Kevin-Sim/SET08103/tree/master/labs">Click here</a>            |
+| Assessment material |         <a href="https://github.com/Kevin-Sim/SET08103/tree/master/assessment">Click here</a>         | 
 
 
 ### Repository Status
