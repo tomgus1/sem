@@ -17,6 +17,8 @@ public class CountriesQueriesTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
+    private final String regex = "[\\r\\n]";
+
     @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
@@ -59,7 +61,7 @@ public class CountriesQueriesTest {
                 "MNO        Country5                                           Continent2           Region2                                  15              Capital5       \n" +
                 "DEF        Country2                                           Continent1           Region1                                  10              Capital2       \n" +
                 "JKL        Country4                                           Continent2           Region2                                  5               Capital4       \n";
-        assertEquals(dataString.replaceAll("\\r|\\n", " "), outContent.toString().replaceAll("\\r|\\n", " "));
+        assertEquals(dataString.replaceAll(regex, " "), outContent.toString().replaceAll(regex, " "));
     }
 
     //check that if a subset of countries is provided that doesn't exist, an empty report will be provided
@@ -68,7 +70,7 @@ public class CountriesQueriesTest {
         CountriesQueries.printReport("Header", "%-10s %-50s %-20s %-40s %-15s %-15s", CountriesQueries.getCountriesInContinent("Random", this.countries));
         String dataString = "Header\n" +
                 "Code       Name                                               Continent            Region                                   Population      Capital        \n";
-        assertEquals(dataString.replaceAll("\\r|\\n", " "), outContent.toString().replaceAll("\\r|\\n", " "));
+        assertEquals(dataString.replaceAll(regex, " "), outContent.toString().replaceAll(regex, " "));
     }
 
     //check that if the limit provided is larger than the subset, the subset will be returned
