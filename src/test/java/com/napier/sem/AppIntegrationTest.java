@@ -2,9 +2,13 @@ package com.napier.sem;
 
 import com.napier.sem.Queries.CountriesQueries;
 import com.napier.sem.Queries.LanguagesQuery;
+import com.napier.sem.Queries.MockData;
+import com.napier.sem.Queries.Shared;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +20,17 @@ public class AppIntegrationTest
     Connection con = app.connect("localhost:33060");
 
     @Test
+    void testConnectionToDatabse() throws SQLException {
+        Statement statement = Shared.CreateStatement(con);
+        Statement mockStatement = con.createStatement();
+        assertEquals(statement, mockStatement);
+    }
+
+    @Test
     void testCountryIsEqual() {
         List<Country> countries = CountriesQueries.getAllCountries(con);
         Country firstCountry = countries.get(0);
-        Country testFirst = new Country("CHN","China","Asia","Eastern Asia",1277558000,"1891");
+        Country testFirst = MockData.getFirstCountry();
         assertEquals(firstCountry.getCode(), testFirst.getCode());
     }
     @Test

@@ -8,6 +8,7 @@ public class Shared {
         Statement statement = null;
         try {
             statement = con.createStatement();
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to create SQL statement");
