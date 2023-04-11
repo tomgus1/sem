@@ -38,11 +38,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
             LanguagesQuery.printReport("Header", "%-10s %-15s %-20s", languages);
             String dataString = "Header" + lineEnd +
             "Language   Speakers        % Worldwide Speakers" + lineEnd +
-            "Chinese    1191843539      19.61 " + lineEnd +
-            "Hindi      405633070       6.67 " + lineEnd +
-            "Spanish    355029462       5.84 " + lineEnd +
-            "English    347077867       5.71 " + lineEnd +
-            "Arabic     233839238       3.85 " ;
+            "Chinese    1191843539      19.61               " + lineEnd +
+            "Hindi      405633070       6.67                " + lineEnd +
+            "Spanish    355029462       5.84                " + lineEnd +
+            "English    347077867       5.71                " + lineEnd +
+            "Arabic     233839238       3.85                " + lineEnd;
             assertEquals(dataString, outContent.toString());
         }
     }
