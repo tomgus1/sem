@@ -1,6 +1,7 @@
 package com.napier.sem.Queries;
 
 import com.napier.sem.Country;
+import com.napier.sem.Language;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,4 +34,16 @@ public class MockData {
     static public List<Country> getTopCountriesMock() {
         return topCountriesMock;
     }
+
+    static Language mockLanguage1 = new Language("Chinese", 1191843539, 19.61F);
+    static Language mockLanguage2 = new Language("Hindi",405633070,6.67F);
+    static Language mockLanguage3 = new Language("Spanish",355029462,5.84F);
+    static Language mockLanguage4 = new Language("English",347077867,5.71F);
+    static Language mockLanguage5 = new Language("Arabic",233839238,3.85F);
+
+    public static List<Language> getAllLanguages() {
+        return languagesMock;
+    }
+    static public List<Language> languagesMock = Arrays.asList(mockLanguage1, mockLanguage2, mockLanguage3, mockLanguage4, mockLanguage5);
+     public List<Language> getLanguagesMock() {return languagesMock; };
 }
