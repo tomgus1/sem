@@ -61,7 +61,7 @@ public class LanguagesQuery {
     public static void printReport(String header, String format, List<Language> list) {
         System.out.println(String.format(header));
         // Print header
-        System.out.println(String.format(format, "%-10s %-15s %-20s",
+        System.out.println(String.format(format,
                 "Language", "Speakers", "% Worldwide Speakers"));
 
         // Loop over all languages in the list

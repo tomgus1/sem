@@ -45,5 +45,4 @@ public class MockData {
         return languagesMock;
     }
     static public List<Language> languagesMock = Arrays.asList(mockLanguage1, mockLanguage2, mockLanguage3, mockLanguage4, mockLanguage5);
-     public List<Language> getLanguagesMock() {return languagesMock; };
 }

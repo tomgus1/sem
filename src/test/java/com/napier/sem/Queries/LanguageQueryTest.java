@@ -45,13 +45,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
             "Arabic     233839238       3.85 " ;
             assertEquals(dataString, outContent.toString());
         }
-
-        //check that if a subset of countries is provided that doesn't exist, an empty report will be provided
-               @Test
-        void expectTopContinentsWithHighLimitToEqualMockData() {
-            assert (CountriesQueries.getCountriesLimitedBy(10, MockData.getAllContinentsMock()))
-                    .equals(MockData.getAllContinentsMock());
-        }
     }
 
 
