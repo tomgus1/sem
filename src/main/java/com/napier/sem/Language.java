@@ -6,6 +6,12 @@ public class Language
     //Default constructor
     public Language() {}
 
+    public Language(String language, int population, float globalPercentage) {
+        this.language = language;
+        this.population = population;
+        this.globalPercentage = globalPercentage;
+    }
+
     // language string
     private String language;
 

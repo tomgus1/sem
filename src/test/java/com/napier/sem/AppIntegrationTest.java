@@ -5,7 +5,6 @@ import com.napier.sem.Queries.LanguagesQuery;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +23,6 @@ public class AppIntegrationTest
     }
     @Test
     void testLanguage() {
-        LanguagesQuery.queryLanguage(con);
+        LanguagesQuery.LanguagesReport(con);
     }
 }

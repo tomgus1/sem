@@ -71,19 +71,10 @@ public class App {
             con = a.connect(args[0]);
         }
 
-        // The population of people, people living in cities, and people not living in cities in each country
-        ArrayList<Population> countryPopulations = PopulationLivingQuery.populationLivingReportCountry(con);
-        PopulationLivingQuery.printPopulationLiving(countryPopulations, con);
+        PopulationLivingQuery.populationLivingReportQuery(con);
 
-        // The population of people, people living in cities, and people not living in cities in each continent
-        ArrayList<Population> continentPopulations = PopulationLivingQuery.populationLivingReportContinent(con);
-        PopulationLivingQuery.printPopulationLiving(continentPopulations, con);
+        LanguagesQuery.LanguagesReport(con);
 
-        // The population of people, people living in cities, and people not living in cities in each region
-        ArrayList<Population> regionPopulations = PopulationLivingQuery.populationLivingReportRegion(con);
-        PopulationLivingQuery.printPopulationLiving(regionPopulations, con);
-
-        LanguagesQuery.queryLanguage(con);
         CountriesQueries.getAllCountryReports(con);
         CapitalCitiesQueries.getAllCapitalCityReports(con);
 
