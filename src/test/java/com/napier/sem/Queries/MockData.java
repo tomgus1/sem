@@ -47,4 +47,18 @@ public class MockData {
     }
 
     static public List<Language> languagesMock = Arrays.asList(mockLanguage1, mockLanguage2, mockLanguage3, mockLanguage4, mockLanguage5);
+
+    //below is sample City object data and list data to test the PopulationSubsetCitiesQueryTest
+    static City mockCity1 = new City(1, "City1", "ABC", "District1", 15);
+    static City mockCity2 = new City(2, "City2", "ABC", "District2", 5);
+    static City mockCity3 = new City(3, "City3", "DEF", "District1", 2);
+    static City mockCity4 = new City(4, "City4", "DEF", "District1", 2);
+    static City mockCity5 = new City(5, "City5", "DEF", "District2", 6);
+    static City mockCity6 = new City(6, "City6", "GHI", "District1", 15);
+    static City mockCity7 = new City(7, "City7", "GHI", "District1", 15);
+    static City mockCity8 = new City(8, "City8", "JKL", "District1", 2);
+    static City mockCity9 = new City(9, "City9", "JKL", "District2", 3);
+    static City mockCity10 = new City(10, "City10", "MNO", "District1", 5);
+    static City mockCity11 = new City(11, "City11", "MNO", "District1", 5);
+    static City mockCity12 = new City(12, "City12", "MNO", "District2", 5);
 }
