@@ -61,4 +61,13 @@ public class MockData {
     static City mockCity10 = new City(10, "City10", "MNO", "District1", 5);
     static City mockCity11 = new City(11, "City11", "MNO", "District1", 5);
     static City mockCity12 = new City(12, "City12", "MNO", "District2", 5);
+
+    static List<City> allCitiesMock = Arrays.asList(mockCity1,mockCity2,mockCity3,mockCity4,mockCity5,mockCity6,
+            mockCity7,mockCity8,mockCity9,mockCity10,mockCity11,mockCity12);
+    static List<City> allDistrictsMock = Arrays.asList(mockCity6,mockCity7);
+    static List<City> allCityCountriesMock = Arrays.asList(mockCity1,mockCity2);
+    static List<City> allCityRegionsMock = Arrays.asList(mockCity1,mockCity2,mockCity3,mockCity4,mockCity5);
+    static List<City> allCityContinentsMock = Arrays.asList(mockCity6,mockCity7,mockCity8,mockCity9,mockCity10,
+            mockCity10,mockCity11,mockCity12);
+    static List<City> topCitiesMock = Arrays.asList(mockCity1,mockCity7,mockCity8,mockCity5);
 }
