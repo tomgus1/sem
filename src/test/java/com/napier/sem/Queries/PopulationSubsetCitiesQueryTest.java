@@ -48,6 +48,12 @@ public class PopulationSubsetCitiesQueryTest {
         assert(PopulationSubsetCitiesQuery.getCitiesInCountry("Country1", cities, countries))
                 .equals(MockData.getAllCitiesInCountriesMock());
     }
+    //assert that the method getCitiesInRegion() will equal the mock data
+    @Test
+    void expectRegionToEqualMockData() {
+        assert(PopulationSubsetCitiesQuery.getCitiesInRegion("Region1", cities, countries))
+                .equals(MockData.getAllCitiesInRegionsMock());
+    }
 
 }
 
