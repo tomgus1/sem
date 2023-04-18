@@ -70,4 +70,23 @@ public class MockData {
     static List<City> allCityContinentsMock = Arrays.asList(mockCity6,mockCity7,mockCity8,mockCity9,mockCity10,
             mockCity10,mockCity11,mockCity12);
     static List<City> topCitiesMock = Arrays.asList(mockCity1,mockCity7,mockCity8,mockCity5);
+
+    public static List<City> getAllCitiesMock() {
+        return allCitiesMock;
+    }
+    public static List<City> getAllCitiesInDistrictMock() {
+        return allDistrictsMock;
+    }
+    public static List<City> getAllCitiesInCountriesMock() {
+        return allCityCountriesMock;
+    }
+    public static List<City> getAllCitiesInRegionsMock() {
+        return allCityRegionsMock;
+    }
+    public static List<City> getAllCitiesInContinentsMock() {
+        return allCityContinentsMock;
+    }
+    public static List<City> getTopCitiesMock() {
+        return topCitiesMock;
+    }
 }
