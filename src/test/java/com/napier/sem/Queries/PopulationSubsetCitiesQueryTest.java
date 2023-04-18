@@ -70,5 +70,12 @@ public class PopulationSubsetCitiesQueryTest {
                 .equals(MockData.getTopCitiesMock());
     }
 
+    //check that if the limit provided is larger than the subset, the subset will be returned
+    @Test
+    void expectTopCitiesWithHighLimitToEqualMockData() {
+        assert (PopulationSubsetCitiesQuery.getCitiesLimitedBy(15, MockData.getAllCitiesMock()))
+                .equals(MockData.getAllCitiesMock());
+    }
+
 }
 
