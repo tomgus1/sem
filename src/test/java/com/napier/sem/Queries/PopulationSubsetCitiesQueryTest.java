@@ -63,5 +63,12 @@ public class PopulationSubsetCitiesQueryTest {
                 .equals(MockData.getAllCitiesInContinentsMock());
     }
 
+    //assert that the method getCitiesLimitedBy() will equal the mock data
+    @Test
+    void expectTopCitiesToEqualMockData() {
+        assert (PopulationSubsetCitiesQuery.getCitiesLimitedBy(4, cities))
+                .equals(MockData.getTopCitiesMock());
+    }
+
 }
 
