@@ -140,6 +140,10 @@ public class PopulationSubsetCitiesQuery {
     public static List<City> getCitiesLimitedBy(int limit, List<City> cities){
         List<City> citiesLimited = new ArrayList<>();
 
+        if (limit > cities.size()) {
+            limit = cities.size();
+        }
+
         for (int i=0; i < limit; i++){
             citiesLimited.add(cities.get(i));
         }
