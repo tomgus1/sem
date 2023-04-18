@@ -16,7 +16,7 @@ public class PopulationSubsetCitiesQuery {
         List<Country> allCountries = CountriesQueries.getAllCountries(con);
 
         //columns format
-        String format = "%-50s %-10s %-40s %-15s";
+        String format = "%-30s %-50s %-40s %-15s";
 
         //report generation
         printReport(
