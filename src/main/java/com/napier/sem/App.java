@@ -1,12 +1,10 @@
 package com.napier.sem;
 
-import java.sql.*;
-import java.util.ArrayList;
+import com.napier.sem.Queries.*;
 
-import com.napier.sem.Queries.CapitalCitiesQueries;
-import com.napier.sem.Queries.CountriesQueries;
-import com.napier.sem.Queries.LanguagesQuery;
-import com.napier.sem.Queries.PopulationLivingQuery;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class App {
     //Connection to MySQL database.
@@ -71,12 +69,13 @@ public class App {
             con = a.connect(args[0]);
         }
 
-        PopulationLivingQuery.populationLivingReportQuery(con);
-
-        LanguagesQuery.LanguagesReport(con);
-
-        CountriesQueries.getAllCountryReports(con);
+        /*
+        * Calls queries from respective files
+        */
         CapitalCitiesQueries.getAllCapitalCityReports(con);
+        CountriesQueries.getAllCountryReports(con);
+        LanguagesQuery.LanguagesReport(con);
+        PopulationLivingQuery.populationLivingReportQuery(con);
 
         // Disconnect from database
         a.disconnect();
