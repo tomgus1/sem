@@ -63,7 +63,6 @@ jobs:
         run: |
           mvn package -DskipTests
           docker-compose up --abort-on-container-exit
-                  docker-compose up --abort-on-container-exit
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
