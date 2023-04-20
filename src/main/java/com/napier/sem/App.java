@@ -54,7 +54,7 @@ public class App {
         }
     }
 
-    public Connection getCon(){
+    public static Connection getCon(){
         return con;
     }
 

@@ -36,6 +36,33 @@ public class MockData {
         return topCountriesMock;
     }
 
+
+    static City mockCapitalCity1 = new City("Capital1", 20);
+    static City mockCapitalCity2 = new City("Capital2", 10);
+    static City mockCapitalCity3 = new City("Capital3",30);
+    static City mockCapitalCity4 = new City("Capital4",5);
+    static City mockCapitalCity5 = new City("Capital5",15);
+    static List<City> allCapitalCitiesMock = Arrays.asList(mockCapitalCity3, mockCapitalCity1, mockCapitalCity5, mockCapitalCity2, mockCapitalCity4);
+    static List<City> capitalCitiesInContinentMock = Arrays.asList(mockCapitalCity3, mockCapitalCity5, mockCapitalCity4);
+    static List<City> capitalCitiesInRegionMock = Arrays.asList(mockCapitalCity3, mockCapitalCity5, mockCapitalCity4);
+    static List<City> topCapitalCitiesMock = Arrays.asList(mockCapitalCity3, mockCapitalCity1, mockCapitalCity5);
+
+    public static List<City> getAllCapitalCities() {
+        return allCapitalCitiesMock;
+    }
+
+    public static List<City> getCapitalCitiesInContinentMock() {
+        return capitalCitiesInContinentMock;
+    }
+
+    static public List<City> getCapitalCitiesInRegionMock() {
+        return capitalCitiesInRegionMock;
+    }
+
+    static public List<City> getTopCapitalCitiesMock() {
+        return topCapitalCitiesMock;
+    }
+
     static Language mockLanguage1 = new Language("Chinese", 1191843539, 19.61F);
     static Language mockLanguage2 = new Language("Hindi", 405633070, 6.67F);
     static Language mockLanguage3 = new Language("Spanish", 355029462, 5.84F);
