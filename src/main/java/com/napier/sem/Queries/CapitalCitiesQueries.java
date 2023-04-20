@@ -2,7 +2,6 @@ package com.napier.sem.Queries;
 
 import com.napier.sem.App;
 import com.napier.sem.City;
-import com.napier.sem.Country;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,12 +11,12 @@ import java.util.List;
 
 public class CapitalCitiesQueries {
 
-    public static void getAllCapitalCityReports(Connection con) {
+    public static void getAllCapitalCityReports() {
 
         /**
          * get capital city data
          */
-        List<City> allCapitalCities = getAllCapitalCities(con);
+        List<City> allCapitalCities = getAllCapitalCities();
         List<City> capitalCitiesInContinent = getCapitalCitiesInContinent("Europe", allCapitalCities);
         List<City> capitalCitiesInRegion = getCapitalCitiesInRegion("Eastern Asia", allCapitalCities);
         List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(3, allCapitalCities);
@@ -64,18 +63,18 @@ public class CapitalCitiesQueries {
         );
     }
 
-    public static List<City> getAllCapitalCities(Connection con) {
+    public static List<City> getAllCapitalCities() {
         /**
          * create list to hold data
          */
         List<City> allCapitalCities = new ArrayList<>();
-        List<Country> allCountries = CountriesQueries.getAllCountries(con);
         {
 
             try {
                 /**
                  * creates an SQL statement
                  */
+                Connection con = App.getCon();
                 Statement stmt = con.createStatement();
 
                 /**
@@ -96,6 +95,7 @@ public class CapitalCitiesQueries {
                     capitalCity.setName(rset.getString("Name"));
                     capitalCity.setPopulation(rset.getInt("Population"));
 
+                    allCapitalCities.add(capitalCity);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
