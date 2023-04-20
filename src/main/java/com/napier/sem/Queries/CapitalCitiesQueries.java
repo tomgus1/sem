@@ -1,6 +1,8 @@
 package com.napier.sem.Queries;
 
+import com.napier.sem.App;
 import com.napier.sem.City;
+import com.napier.sem.Country;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,11 +18,11 @@ public class CapitalCitiesQueries {
          * get capital city data
          */
         List<City> allCapitalCities = getAllCapitalCities(con);
-        List<City> capitalCitiesInContinent = getCapitalCitiesInContinent(con,"Europe", allCapitalCities);
-        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion(con,"Eastern Asia", allCapitalCities);
-        List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(con, 3, allCapitalCities);
-        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(con,3, "Europe", capitalCitiesInContinent);
-        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(con, 3, "Eastern Asia", capitalCitiesInRegion);
+        List<City> capitalCitiesInContinent = getCapitalCitiesInContinent("Europe", allCapitalCities);
+        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion("Eastern Asia", allCapitalCities);
+        List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(3, allCapitalCities);
+        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(3, "Europe", capitalCitiesInContinent);
+        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(3, "Eastern Asia", capitalCitiesInRegion);
 
         /**
          * columns format
@@ -67,6 +69,7 @@ public class CapitalCitiesQueries {
          * create list to hold data
          */
         List<City> allCapitalCities = new ArrayList<>();
+        List<Country> allCountries = CountriesQueries.getAllCountries(con);
         {
 
             try {
@@ -80,9 +83,9 @@ public class CapitalCitiesQueries {
                  */
                 ResultSet rset = stmt.executeQuery(
                         "SELECT city.Name, country.Name AS Country, city.Population "
-                        + "FROM country country "
-                        + "LEFT JOIN city city on country.Capital = city.ID "
-                        + "ORDER BY city.Population DESC ");
+                                + "FROM country country "
+                                + "LEFT JOIN city city on country.Capital = city.ID "
+                                + "ORDER BY city.Population DESC ");
 
                 while (rset.next()) {
                     /**
@@ -93,7 +96,6 @@ public class CapitalCitiesQueries {
                     capitalCity.setName(rset.getString("Name"));
                     capitalCity.setPopulation(rset.getInt("Population"));
 
-                    allCapitalCities.add(capitalCity);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -107,25 +109,25 @@ public class CapitalCitiesQueries {
     /**
      * list all capital cities in a continent
      */
-    public static List<City> getCapitalCitiesInContinent(Connection con, String continent, List<City> cities) {
+    public static List<City> getCapitalCitiesInContinent(String continent, List<City> cities) {
         List<City> capitalCitiesInContinent = new ArrayList<>();
 
         try {
-
             /**
              * creates an SQL statement
              */
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
              * sends SQL statement to the database
              */
             ResultSet rset = stmt.executeQuery(
-                        "SELECT city.Name, country.Name AS Country, city.Population "
-                                + "FROM country country "
-                                + "LEFT JOIN city city ON country.Capital = city.ID "
-                                + "WHERE country.Continent = '"+ continent +"' "
-                                + "ORDER BY city.Population DESC ");
+                    "SELECT city.Name, country.Name AS Country, city.Population "
+                            + "FROM country country "
+                            + "LEFT JOIN city city ON country.Capital = city.ID "
+                            + "WHERE country.Continent = '"+ continent +"' "
+                            + "ORDER BY city.Population DESC ");
 
             while (rset.next()) {
                 /**
@@ -148,7 +150,7 @@ public class CapitalCitiesQueries {
     /**
      * list of all capital cities in a region
      */
-    public static List<City> getCapitalCitiesInRegion(Connection con, String region, List<City> cities) {
+    public static List<City> getCapitalCitiesInRegion(String region, List<City> cities) {
         List<City> capitalCitiesInRegion = new ArrayList<>();
 
         try {
@@ -156,6 +158,7 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -189,7 +192,7 @@ public class CapitalCitiesQueries {
     /**
      * list top n capital cities in the world
      */
-    public static List<City> getCapitalCitiesLimitedBy(Connection con, int n, List<City> cities) {
+    public static List<City> getCapitalCitiesLimitedBy(int n, List<City> cities) {
         List<City> capitalCitiesLimited = new ArrayList<>();
 
         if (n < 1) {
@@ -200,6 +203,7 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -233,7 +237,7 @@ public class CapitalCitiesQueries {
     /**
      * list top n capital cities in a continent
      */
-    public static List<City> getCapitalCitiesInContinentLimitedBy(Connection con, int n, String continent, List<City> cities) {
+    public static List<City> getCapitalCitiesInContinentLimitedBy(int n, String continent, List<City> cities) {
         List<City> capitalCitiesInContinentLimited = new ArrayList<>();
 
         if (n < 1) {
@@ -244,6 +248,7 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -278,7 +283,7 @@ public class CapitalCitiesQueries {
     /**
      * list top n capital cities in a region
      */
-    public static List<City> getCapitalCitiesInRegionLimitedBy(Connection con, int n, String region, List<City> cities) {
+    public static List<City> getCapitalCitiesInRegionLimitedBy(int n, String region, List<City> cities) {
         List<City> capitalCitiesInRegionLimited = new ArrayList<>();
 
         if (n < 1) {
@@ -289,6 +294,7 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
