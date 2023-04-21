@@ -1,5 +1,6 @@
 package com.napier.sem.Queries;
 
+import com.napier.sem.App;
 import com.napier.sem.Population;
 
 import java.sql.Connection;
@@ -11,9 +12,9 @@ import java.util.List;
 public class PopulationLivingQuery {
     public static void populationLivingReportQuery(Connection con) {
         //get population data
-        List<Population> populationCountry = getPopulationLivingCountry(con);
-        List<Population> populationContinent = getPopulationLivingContinent(con);
-        List<Population> populationRegion = getPopulationLivingRegion(con);
+        List<Population> populationCountry = getPopulationLivingCountry();
+        List<Population> populationContinent = getPopulationLivingContinent();
+        List<Population> populationRegion = getPopulationLivingRegion();
 
         //columns format
         String format = "%-40s %-20s %-25s %-25s %-25s %-25s";
@@ -38,13 +39,14 @@ public class PopulationLivingQuery {
         );
 
     }
-    public static List<Population> getPopulationLivingCountry(Connection con)
+    public static List<Population> getPopulationLivingCountry()
     {
         // Holds a list of queried results
         List<Population> allPopulations = new ArrayList<>();
         try
         {
             // Create an SQL statement
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             // Execute SQL statement
@@ -75,13 +77,14 @@ public class PopulationLivingQuery {
         }
         return allPopulations;
     }
-    public static List<Population> getPopulationLivingContinent(Connection con)
+    public static List<Population> getPopulationLivingContinent()
     {
         // Holds a list of queried results
         List<Population> allPopulations = new ArrayList<>();
         try
         {
             // Create an SQL statement
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             // Execute SQL statement
@@ -113,13 +116,14 @@ public class PopulationLivingQuery {
         return allPopulations;
     }
 
-    public static List<Population> getPopulationLivingRegion(Connection con)
+    public static List<Population> getPopulationLivingRegion()
     {
         // Holds a list of queried results
         List<Population> allPopulations = new ArrayList<>();
         try
         {
             // Create an SQL statement
+            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             // Execute SQL statement
@@ -155,7 +159,7 @@ public class PopulationLivingQuery {
         System.out.println(String.format(header));
 
         System.out.println(String.format(format,
-                "Name", "Population", "Living In Cities", "Living Outside Cities", "Living In Cities (%)", "Living In Cities (%)"));
+                "Name", "Population", "Living In Cities", "Living Outside Cities", "Living In Cities (%)", "Living Outside Cities (%)"));
 
 
         // Loop over all countries in the list
