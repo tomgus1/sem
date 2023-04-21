@@ -72,7 +72,7 @@ public class App {
         /*
         * Calls queries from respective files
         */
-        CapitalCitiesQueries.getAllCapitalCityReports(con);
+        CapitalCitiesQueries.getAllCapitalCityReports();
         CountriesQueries.getAllCountryReports(con);
         LanguagesQuery.LanguagesReport(con);
         PopulationLivingQuery.populationLivingReportQuery(con);
