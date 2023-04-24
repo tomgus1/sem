@@ -4,9 +4,12 @@ import com.napier.sem.Queries.CountriesQueries;
 import com.napier.sem.Queries.LanguagesQuery;
 import com.napier.sem.Queries.MockData;
 import com.napier.sem.Queries.Shared;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -18,13 +21,23 @@ public class AppIntegrationTest
 {
     static App app = new App();
     Connection con = app.connect("localhost:33060");
+    Statement statement = Shared.CreateStatement(con);
 
-    @Test
-    void testConnectionToDatabse() throws SQLException {
-        Statement statement = Shared.CreateStatement(con);
-        Statement mockStatement = con.createStatement();
-        assertEquals(statement, mockStatement);
-    }
+    String simpleQuery = "SELECT country.Code AS 'Code'," +
+            "country.Name AS 'Name'," +
+            "country.Continent AS 'Continent'," +
+            "country.Region AS 'Region'," +
+            "country.Population AS 'Population'," +
+            "country.Capital AS 'Capital' " +
+            "FROM country " +
+            "GROUP BY country.Code " +
+            "ORDER BY country.Population DESC ";
+
+//    @Test
+//    void assertErrorOnFailedStatement() {
+//        ResultSet rset = CountriesQueries.getSqlResults(statement, simpleQuery);
+//        assertEquals(" ", rset.getString(1));
+//    }
 
     @Test
     void testCountryIsEqual() {

@@ -16,7 +16,6 @@ public class CountriesQueriesTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-
     private final String regex = "[\\r\\n]";
 
     @BeforeEach
