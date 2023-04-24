@@ -3,6 +3,7 @@ package com.napier.sem.Queries;
 import com.napier.sem.City;
 import com.napier.sem.Country;
 import com.napier.sem.Language;
+import com.napier.sem.Population;
 
 import java.util.Arrays;
 import java.util.List;
@@ -116,4 +117,14 @@ public class MockData {
     public static List<City> getTopCitiesMock() {
         return topCitiesMock;
     }
+
+    static Population populationCountry1 = new Population("Country 1",1000000,105400,  270000,3131200,7.9383745,92.06163);
+    static Population populationCountry2 = new Population("Country 2",2000000,204500,26245483,5591921,31.942528,68.05747);
+    static Population populationCountry3 = new Population("Country 3",3000000,345355,123298526,89036347,12.163672,87.83633);
+    static Population populationCountry4 = new Population("Country 4",40000500,5555434,1132403,22797597,4.732148,95.26785);
+    static Population populationCountry5 = new Population("Country 5",143345,5000,2770458,6710542,29.221159,70.77884  );
+
+    static List<Population> allPopulationCountry = Arrays.asList(populationCountry1, populationCountry2, populationCountry3, populationCountry4, populationCountry5);
+
+    public static List<Population> getAllPopulationCountry() {return allPopulationCountry; }
 }

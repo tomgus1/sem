@@ -4,6 +4,20 @@ public class Population { // constructor
     public Population() {
     }
 
+    public Population(String name, long populationCountry, long populationCity, long livingInCities, long livingOutside, double livingInCitiesPercentage, double livingOutsidePercentage) {
+        this.name = name;
+        this.populationCountry = populationCountry;
+        this.populationCity = populationCity;
+        this.livingInCities = livingInCities;
+        this.livingOutside = livingOutside;
+        this.livingInCitiesPercentage = livingInCitiesPercentage;
+        this.livingOutsidePercentage = livingOutsidePercentage;
+    }
+    private long livingInCities;
+    private long livingOutside;
+    private double livingInCitiesPercentage;
+    private double livingOutsidePercentage;
+
     // Population's name
     private String name;
 
