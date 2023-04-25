@@ -93,12 +93,14 @@ public class App {
         }
         /**
         * Calls queries from respective files
+         * mocks a user input for "limit by N" queries
         */
-        CapitalCitiesQueries.getAllCapitalCityReports();
-        CountriesQueries.getAllCountryReports(con);
+        int limitBy = 3;
+        CapitalCitiesQueries.getAllCapitalCityReports(con, limitBy);
+        CountriesQueries.getAllCountryReports(con, limitBy);
         LanguagesQuery.LanguagesReport(con);
         PopulationLivingQuery.populationLivingReportQuery(con);
-        PopulationSubsetCitiesQuery.populationCitiesInSubset(con);
+        PopulationSubsetCitiesQuery.populationCitiesInSubset(con, limitBy);
         TotalPopulationQueries.getTotalPopulations(con);
 
         /**

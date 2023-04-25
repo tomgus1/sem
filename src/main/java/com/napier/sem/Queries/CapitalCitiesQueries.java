@@ -1,6 +1,5 @@
 package com.napier.sem.Queries;
 
-import com.napier.sem.App;
 import com.napier.sem.City;
 
 import java.sql.Connection;
@@ -11,17 +10,17 @@ import java.util.List;
 
 public class CapitalCitiesQueries {
 
-    public static void getAllCapitalCityReports() {
+    public static void getAllCapitalCityReports(Connection con, int limitBy) {
 
         /**
          * get capital city data
          */
-        List<City> allCapitalCities = getAllCapitalCities();
-        List<City> capitalCitiesInContinent = getCapitalCitiesInContinent("Europe", allCapitalCities);
-        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion("Eastern Asia", allCapitalCities);
-        List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(3, allCapitalCities);
-        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(3, "Europe", capitalCitiesInContinent);
-        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(3, "Eastern Asia", capitalCitiesInRegion);
+        List<City> allCapitalCities = getAllCapitalCities(con);
+        List<City> capitalCitiesInContinent = getCapitalCitiesInContinent("Europe", con);
+        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion("Eastern Asia", con);
+        List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(limitBy, con);
+        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(limitBy, "Europe", con);
+        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(limitBy, "Eastern Asia", con);
 
         /**
          * columns format
@@ -63,7 +62,7 @@ public class CapitalCitiesQueries {
         );
     }
 
-    public static List<City> getAllCapitalCities() {
+    public static List<City> getAllCapitalCities(Connection con) {
         /**
          * create list to hold data
          */
@@ -74,7 +73,6 @@ public class CapitalCitiesQueries {
                 /**
                  * creates an SQL statement
                  */
-                Connection con = App.getCon();
                 Statement stmt = con.createStatement();
 
                 /**
@@ -109,14 +107,13 @@ public class CapitalCitiesQueries {
     /**
      * list all capital cities in a continent
      */
-    public static List<City> getCapitalCitiesInContinent(String continent, List<City> cities) {
+    public static List<City> getCapitalCitiesInContinent(String continent, Connection con) {
         List<City> capitalCitiesInContinent = new ArrayList<>();
 
         try {
             /**
              * creates an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -150,7 +147,7 @@ public class CapitalCitiesQueries {
     /**
      * list of all capital cities in a region
      */
-    public static List<City> getCapitalCitiesInRegion(String region, List<City> cities) {
+    public static List<City> getCapitalCitiesInRegion(String region, Connection con) {
         List<City> capitalCitiesInRegion = new ArrayList<>();
 
         try {
@@ -158,7 +155,6 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -192,7 +188,7 @@ public class CapitalCitiesQueries {
     /**
      * list top n capital cities in the world
      */
-    public static List<City> getCapitalCitiesLimitedBy(int n, List<City> cities) {
+    public static List<City> getCapitalCitiesLimitedBy(int n, Connection con) {
         List<City> capitalCitiesLimited = new ArrayList<>();
 
         if (n < 1) {
@@ -203,7 +199,6 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -237,7 +232,7 @@ public class CapitalCitiesQueries {
     /**
      * list top n capital cities in a continent
      */
-    public static List<City> getCapitalCitiesInContinentLimitedBy(int n, String continent, List<City> cities) {
+    public static List<City> getCapitalCitiesInContinentLimitedBy(int n, String continent, Connection con) {
         List<City> capitalCitiesInContinentLimited = new ArrayList<>();
 
         if (n < 1) {
@@ -248,7 +243,6 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -283,7 +277,7 @@ public class CapitalCitiesQueries {
     /**
      * list top n capital cities in a region
      */
-    public static List<City> getCapitalCitiesInRegionLimitedBy(int n, String region, List<City> cities) {
+    public static List<City> getCapitalCitiesInRegionLimitedBy(int n, String region, Connection con) {
         List<City> capitalCitiesInRegionLimited = new ArrayList<>();
 
         if (n < 1) {
@@ -294,7 +288,6 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
