@@ -17,3 +17,13 @@
 | Develop Branch | ![GitHub Workflow Status (develop)](https://img.shields.io/github/actions/workflow/status/tomgus1/sem/main.yml?branch=develop)          |
 | License       | [![LICENSE](https://img.shields.io/github/license/tomgus1/sem.svg?style=flat-square)](https://github.com/tomgus1/sem/blob/master/LICENSE) |
 | Releases      | [![Releases](https://img.shields.io/github/release/tomgus1/sem/all.svg?style=flat-square)](https://github.com/tomgus1/sem/releases)     |
+
+
+## Contributors 
+
+|                   | Code review 1 | Code review 2 | Code review 3 | Code review 4 | Final |
+|-------------------|---------------|---------------|---------------|---------------|-------|
+| 10009023 | 25%           | 25%           | 25%           | 25%           | 25%   |
+| 40429143     | 25%           | 25%           | 25%           | 25%           | 25%   |
+| 40544136         | 25%           | 25%           | 25%           | 25%           | 25%   |
+| 40544143       | 25%           | 25%           | 25%           | 25%           | 25%   |
