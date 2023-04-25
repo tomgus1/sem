@@ -96,11 +96,11 @@ public class App {
          * mocks a user input for "limit by N" queries
         */
         int limitBy = 3;
-        CapitalCitiesQueries.getAllCapitalCityReports(con);
+        CapitalCitiesQueries.getAllCapitalCityReports(con, limitBy);
         CountriesQueries.getAllCountryReports(con, limitBy);
         LanguagesQuery.LanguagesReport(con);
         PopulationLivingQuery.populationLivingReportQuery(con);
-        PopulationSubsetCitiesQuery.populationCitiesInSubset(con);
+        PopulationSubsetCitiesQuery.populationCitiesInSubset(con, limitBy);
         TotalPopulationQueries.getTotalPopulations(con);
 
         /**

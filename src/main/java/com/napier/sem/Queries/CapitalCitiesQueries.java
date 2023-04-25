@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CapitalCitiesQueries {
 
-    public static void getAllCapitalCityReports(Connection con) {
+    public static void getAllCapitalCityReports(Connection con, int limitBy) {
 
         /**
          * get capital city data
@@ -18,9 +18,9 @@ public class CapitalCitiesQueries {
         List<City> allCapitalCities = getAllCapitalCities(con);
         List<City> capitalCitiesInContinent = getCapitalCitiesInContinent("Europe", con);
         List<City> capitalCitiesInRegion = getCapitalCitiesInRegion("Eastern Asia", con);
-        List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(3, con);
-        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(3, "Europe", con);
-        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(3, "Eastern Asia", con);
+        List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(limitBy, con);
+        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(limitBy, "Europe", con);
+        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(limitBy, "Eastern Asia", con);
 
         /**
          * columns format

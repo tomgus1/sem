@@ -14,9 +14,9 @@ public class PopulationLivingQuery {
         /**
          * get population data
          */
-        List<Population> populationCountry = getPopulationLivingCountry();
-        List<Population> populationContinent = getPopulationLivingContinent();
-        List<Population> populationRegion = getPopulationLivingRegion();
+        List<Population> populationCountry = getPopulationLivingCountry(con);
+        List<Population> populationContinent = getPopulationLivingContinent(con);
+        List<Population> populationRegion = getPopulationLivingRegion(con);
 
         /**
          * columns format
@@ -43,7 +43,7 @@ public class PopulationLivingQuery {
         );
 
     }
-    public static List<Population> getPopulationLivingCountry()
+    public static List<Population> getPopulationLivingCountry(Connection con)
     {
         /**
          * Holds a list of queried results
@@ -54,7 +54,6 @@ public class PopulationLivingQuery {
             /**
              * Create an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -96,7 +95,7 @@ public class PopulationLivingQuery {
         }
         return allPopulations;
     }
-    public static List<Population> getPopulationLivingContinent()
+    public static List<Population> getPopulationLivingContinent(Connection con)
     {
         /**
          * Holds a list of queried results
@@ -107,7 +106,6 @@ public class PopulationLivingQuery {
             /**
              * Create an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
@@ -150,7 +148,7 @@ public class PopulationLivingQuery {
         return allPopulations;
     }
 
-    public static List<Population> getPopulationLivingRegion()
+    public static List<Population> getPopulationLivingRegion(Connection con)
     {
         /**
          * Holds a list of queried results
@@ -161,7 +159,6 @@ public class PopulationLivingQuery {
             /**
              * Create an SQL statement
              */
-            Connection con = App.getCon();
             Statement stmt = con.createStatement();
 
             /**
