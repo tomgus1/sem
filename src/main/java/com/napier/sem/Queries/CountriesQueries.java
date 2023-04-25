@@ -11,14 +11,14 @@ import java.util.List;
 public class CountriesQueries {
 
     //todo, add user input for continent, region, limit
-    public static void getAllCountryReports(Connection con) {
+    public static void getAllCountryReports(Connection con, int limitBy) {
         //get country data
         List<Country> allCountries = getAllCountries(con);
         List<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
         List<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
-        List<Country> allCountriesLimited = getCountriesLimitedBy(3, allCountries);
-        List<Country> countriesInContinentLimited = getCountriesLimitedBy(3, countriesInContinent);
-        List<Country> countriesInRegionLimited = getCountriesLimitedBy(3, countriesInRegion);
+        List<Country> allCountriesLimited = getCountriesLimitedBy(limitBy, allCountries);
+        List<Country> countriesInContinentLimited = getCountriesLimitedBy(limitBy, countriesInContinent);
+        List<Country> countriesInRegionLimited = getCountriesLimitedBy(limitBy, countriesInRegion);
 
         //columns format
         String format = "%-10s %-50s %-20s %-40s %-15s %-15s";

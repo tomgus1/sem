@@ -11,18 +11,18 @@ import java.util.List;
 
 public class PopulationSubsetCitiesQuery {
     //get city data
-    public static void populationCitiesInSubset (Connection con){
+    public static void populationCitiesInSubset (Connection con, int limitBy){
         List<City> allCities = getAllCities(con);
         List<Country> allCountries = CountriesQueries.getAllCountries(con);
         List<City> citiesInDistrict = getCitiesInDistrict("England", allCities);
         List<City> citiesInCountry = getCitiesInCountry("Germany", allCities, allCountries);
         List<City> citiesInRegion = getCitiesInRegion("Eastern Asia", allCities, allCountries);
         List<City> citiesInContinent = getCitiesInContinent("Europe", allCities, allCountries);
-        List<City> allCitiesLimited = getCitiesLimitedBy(3, allCities);
-        List<City> citiesInDistrictLimited = getCitiesLimitedBy(3, citiesInDistrict);
-        List<City> citiesInCountryLimited = getCitiesLimitedBy(3, citiesInCountry);
-        List<City> citiesInRegionLimited = getCitiesLimitedBy(3, citiesInRegion);
-        List<City> citiesInContinentLimited = getCitiesLimitedBy(3, citiesInContinent);
+        List<City> allCitiesLimited = getCitiesLimitedBy(limitBy, allCities);
+        List<City> citiesInDistrictLimited = getCitiesLimitedBy(limitBy, citiesInDistrict);
+        List<City> citiesInCountryLimited = getCitiesLimitedBy(limitBy, citiesInCountry);
+        List<City> citiesInRegionLimited = getCitiesLimitedBy(limitBy, citiesInRegion);
+        List<City> citiesInContinentLimited = getCitiesLimitedBy(limitBy, citiesInContinent);
 
         //columns format
         String format = "%-30s %-50s %-40s %-15s";
