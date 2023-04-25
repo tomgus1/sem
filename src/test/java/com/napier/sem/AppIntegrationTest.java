@@ -2,10 +2,10 @@ package com.napier.sem;
 
 import com.napier.sem.Queries.CountriesQueries;
 import com.napier.sem.Queries.LanguagesQuery;
+import com.napier.sem.Queries.MockData;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,11 +19,11 @@ public class AppIntegrationTest
     void testCountryIsEqual() {
         List<Country> countries = CountriesQueries.getAllCountries(con);
         Country firstCountry = countries.get(0);
-        Country testFirst = new Country("CHN","China","Asia","Eastern Asia",1277558000,"1891");
+        Country testFirst = MockData.getFirstCountry();
         assertEquals(firstCountry.getCode(), testFirst.getCode());
     }
     @Test
     void testLanguage() {
-        LanguagesQuery.queryLanguage(con);
+        LanguagesQuery.LanguagesReport(con);
     }
 }

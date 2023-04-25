@@ -1,9 +1,13 @@
 package com.napier.sem;
 
-
+/**
+ * Attributes of a Country.
+ */
 public class Country
 {
-    // constructor
+    /**
+     * Default constructor
+     */
     public Country() {}
     public Country(String code, String name, String continent, String region, int population, String capital) {
         this.code = code;
@@ -14,80 +18,117 @@ public class Country
         this.capital = capital;
     }
 
-    // Country's Code
+    /**
+     * Country's Code
+     */
+
     private String code;
+    /**
+     *Country's Name
+     */
 
-    // Country's Name
     private String name;
+    /**
+     * Country's Continent
+     */
 
-    //Country's Continent
     private String continent;
 
-    // Country's Region
+    /**
+     * Country's Region
+     */
     private String region;
 
-    // Country Population
+    /**
+     *Country Population
+     */
     private int population;
-    // Country's Capital
-
+    /**
+     * Country's Capital
+     */
     private String capital;
 
-    // Updates the Country Code
+    /**
+     *Updates the Country Code
+     */
+
     public void setCode(String code) {
         this.code = code;
     }
 
-    // gets the Country Code
+    /**
+     *gets the Country Code
+     */
     public String getCode() {
         return code;
     }
+    /**
+     * gets the Country Name
+     */
 
-    // gets the Country Name
     public void setName(String name) {
         this.name = name;
     }
 
-    //gets the Country Name
+    /**
+     * gets the Country Name
+     */
     public String getName() {
         return name;
     }
 
-    // Updates the Country Continent
+    /**
+     * Updates the Country Continent
+     */
     public void setContinent(String continent) {
         this.continent = continent;
     }
 
-    // gets the Country Continent
+    /**
+     * gets the Country Continent
+     */
     public String getContinent() {
         return continent;
     }
 
-    //Updates the Country Region
+    /**
+     * Updates the Country Region
+     */
     public void setRegion(String region) {
         this.region = region;
     }
 
-    //gets the Country Region
+    /**
+     * gets the Country Region
+     */
     public String getRegion() {
         return region;
     }
 
-    // Updates the Country Population
+    /**
+     * Updates the Country Population
+     */
     public void setPopulation(int population) {
         this.population = population;
     }
 
-    //gets the Country Population
+    /**
+     * gets the Country Population
+     */
     public int getPopulation() {
         return population;
     }
 
-    // Updates the Country Capital
+    /**
+     * Updates the Country Capital
+     */
     public void setCapital(String capital) {
         this.capital = capital;
     }
 
-    // gets the Country Capital
+    /**
+     * gets the Country Capital
+     */
     public String getCapital() {
         return capital;
     }
