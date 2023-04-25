@@ -36,6 +36,10 @@ public class City
      */
     private String countryCode;
     /**
+     * City's Country
+     */
+    private String country;
+    /**
      * City's District
      */
     private String district;
@@ -85,6 +89,21 @@ public class City
      */
     public String getCountryCode() {
         return countryCode;
+    }
+
+    /**
+     * Updates the Country of the City
+     * @param country
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    /**
+     * Retrieves the Country of the City
+     * @return Country of City
+     */
+    public String getCountry() {
+        return country;
     }
 
     /**
