@@ -25,7 +25,7 @@ public class PopulationSubsetCitiesQuery {
         List<City> citiesInContinentLimited = getCitiesLimitedBy(limitBy, citiesInContinent);
 
         //columns format
-        String format = "%-30s %-50s %-40s %-15s";
+        String format = "%-40s %-50s %-40s %-15s";
 
         //report generation
         printReport(
@@ -82,10 +82,12 @@ public class PopulationSubsetCitiesQuery {
             //execute SQL statement
             ResultSet rset = stmt.executeQuery(
                     "SELECT city.CountryCode AS CountryCode, "
+                            + "country.Name AS Country, "
                             + "city.Name AS Name, "
                             + "city.District AS District, "
                             + "city.Population AS Population "
                             + "FROM city "
+                            + "LEFT JOIN country country on city.CountryCode = country.Code "
                             + "ORDER BY city.Population DESC ");
 
             while (rset.next())
@@ -94,6 +96,7 @@ public class PopulationSubsetCitiesQuery {
                 City city = new City();
 
                 city.setCountryCode(rset.getString("CountryCode"));
+                city.setCountry(rset.getString("Country"));
                 city.setName(rset.getString("Name"));
                 city.setDistrict(rset.getString("District"));
                 city.setPopulation(rset.getInt("Population"));
@@ -214,7 +217,7 @@ public class PopulationSubsetCitiesQuery {
 
             System.out.println(String.format(format,
                     city.getName(),
-                    city.getCountryCode(),
+                    city.getCountry(),
                     city.getDistrict(),
                     city.getPopulation()));
         }
