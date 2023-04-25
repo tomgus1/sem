@@ -10,16 +10,18 @@ public class City
      */
     public City() {}
 
-    public City(int id, String name, String countryCode, String district, int population) {
+    public City(int id, String name, String countryCode, String country, String district, int population) {
         this.id = id;
         this.name = name;
         this.countryCode = countryCode;
+        this.country = country;
         this.district = district;
         this.population = population;
     }
 
-    public City(String name, int population) {
+    public City(String name, String country, int population) {
         this.name = name;
+        this.country = country;
         this.population = population;
     }
 
@@ -35,6 +37,10 @@ public class City
      * City's Country Code
      */
     private String countryCode;
+    /**
+     * City's Country
+     */
+    private String country;
     /**
      * City's District
      */
@@ -85,6 +91,21 @@ public class City
      */
     public String getCountryCode() {
         return countryCode;
+    }
+
+    /**
+     * Updates the Country of the City
+     * @param country
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
+    /**
+     * Retrieves the Country of the City
+     * @return Country of City
+     */
+    public String getCountry() {
+        return country;
     }
 
     /**
