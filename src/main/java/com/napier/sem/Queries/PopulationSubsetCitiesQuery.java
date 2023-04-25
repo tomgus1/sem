@@ -14,6 +14,15 @@ public class PopulationSubsetCitiesQuery {
     public static void populationCitiesInSubset (Connection con){
         List<City> allCities = getAllCities(con);
         List<Country> allCountries = CountriesQueries.getAllCountries(con);
+        List<City> citiesInDistrict = getCitiesInDistrict("England", allCities);
+        List<City> citiesInCountry = getCitiesInCountry("Germany", allCities, allCountries);
+        List<City> citiesInRegion = getCitiesInRegion("Eastern Asia", allCities, allCountries);
+        List<City> citiesInContinent = getCitiesInContinent("Europe", allCities, allCountries);
+        List<City> allCitiesLimited = getCitiesLimitedBy(3, allCities);
+        List<City> citiesInDistrictLimited = getCitiesLimitedBy(3, citiesInDistrict);
+        List<City> citiesInCountryLimited = getCitiesLimitedBy(3, citiesInCountry);
+        List<City> citiesInRegionLimited = getCitiesLimitedBy(3, citiesInRegion);
+        List<City> citiesInContinentLimited = getCitiesLimitedBy(3, citiesInContinent);
 
         //columns format
         String format = "%-30s %-50s %-40s %-15s";
@@ -23,6 +32,42 @@ public class PopulationSubsetCitiesQuery {
                 "All the cities in the world organised by largest population to smallest",
                 format,
                 allCities);
+        printReport(
+                "All the cities in a district organised by largest population to smallest.",
+                format,
+                citiesInDistrict);
+        printReport(
+                "All the cities in a country organised by largest population to smallest.",
+                format,
+                citiesInCountry);
+        printReport(
+                "All the cities in a region organised by largest population to smallest.",
+                format,
+                citiesInRegion);
+        printReport(
+                "All the cities in a continent organised by largest population to smallest.",
+                format,
+                citiesInContinent);
+        printReport(
+                "The top N populated cities in the world where N is provided by the user.",
+                format,
+                allCitiesLimited);
+        printReport(
+                "The top N populated cities in a district where N is provided by the user.",
+                format,
+                citiesInDistrictLimited);
+        printReport(
+                "The top N populated cities in a country where N is provided by the user.",
+                format,
+                citiesInCountryLimited);
+        printReport(
+                "The top N populated cities in a region where N is provided by the user.",
+                format,
+                citiesInRegionLimited);
+        printReport(
+                "The top N populated cities in a continent where N is provided by the user.",
+                format,
+                citiesInContinentLimited);
 
     }
 
@@ -36,10 +81,10 @@ public class PopulationSubsetCitiesQuery {
             Statement stmt = con.createStatement();
             //execute SQL statement
             ResultSet rset = stmt.executeQuery(
-                    "SELECT city.CountryCode AS 'CountryCode' " +
-                            "city.Name AS 'Name' " +
-                            "city.District AS 'District' " +
-                            "city.Population AS 'Population' "
+                    "SELECT city.CountryCode AS CountryCode, "
+                            + "city.Name AS Name, "
+                            + "city.District AS District, "
+                            + "city.Population AS Population "
                             + "FROM city "
                             + "ORDER BY city.Population DESC ");
 
