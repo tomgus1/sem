@@ -7,6 +7,16 @@ import java.sql.Statement;
 
 public class TotalPopulationQueries {
 
+    public static void getTotalPopulations(Connection con){
+        getPopulationWorld(con);
+        getPopulationRegion("Eastern Asia", con);
+        getPopulationContinent("Europe", con);
+        getPopulationCountry("Germany", con);
+        getPopulationDistrict("England", con);
+        getPopulationCity("London", con);
+
+    }
+
     public static void getPopulationWorld (Connection con){
         long population = 0;
         try
