@@ -81,12 +81,12 @@ public class PopulationSubsetCitiesQuery {
             Statement stmt = con.createStatement();
             //execute SQL statement
             ResultSet rset = stmt.executeQuery(
-                    "SELECT CountryCode AS 'CountryCode' " +
-                            "Name AS 'Name' " +
-                            "District AS 'District' " +
-                            "Population AS 'Population' "
+                    "SELECT city.CountryCode AS CountryCode, "
+                            + "city.Name AS Name, "
+                            + "city.District AS District, "
+                            + "city.Population AS Population "
                             + "FROM city "
-                            + "ORDER BY Population DESC ");
+                            + "ORDER BY city.Population DESC ");
 
             while (rset.next())
             {
