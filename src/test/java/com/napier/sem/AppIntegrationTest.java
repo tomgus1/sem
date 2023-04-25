@@ -24,6 +24,6 @@ public class AppIntegrationTest
     }
     @Test
     void testLanguage() {
-        LanguagesQuery.queryLanguage(con);
+        LanguagesQuery.LanguagesReport(con);
     }
 }

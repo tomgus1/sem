@@ -16,7 +16,7 @@ public class PopulationSubsetCitiesQuery {
         List<Country> allCountries = CountriesQueries.getAllCountries(con);
 
         //columns format
-        String format = "%-50s %-10s %-40s %-15s";
+        String format = "%-30s %-50s %-40s %-15s";
 
         //report generation
         printReport(
@@ -139,6 +139,10 @@ public class PopulationSubsetCitiesQuery {
     //use list to get top n cities
     public static List<City> getCitiesLimitedBy(int limit, List<City> cities){
         List<City> citiesLimited = new ArrayList<>();
+
+        if (limit > cities.size()) {
+            limit = cities.size();
+        }
 
         for (int i=0; i < limit; i++){
             citiesLimited.add(cities.get(i));
