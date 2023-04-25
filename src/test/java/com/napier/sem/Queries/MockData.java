@@ -103,7 +103,7 @@ public class MockData {
     static List<City> allCityRegionsMock = Arrays.asList(mockCity1,mockCity2,mockCity3,mockCity4,mockCity5);
     static List<City> allCityContinentsMock = Arrays.asList(mockCity6,mockCity7,mockCity8,mockCity9,mockCity10,
             mockCity10,mockCity11,mockCity12);
-    static List<City> topCitiesMock = Arrays.asList(mockCity1,mockCity7,mockCity8,mockCity5);
+    static List<City> topCitiesMock = Arrays.asList(mockCity1,mockCity6,mockCity7,mockCity5);
 
     public static List<City> getAllCitiesMock() {
         return allCitiesMock;

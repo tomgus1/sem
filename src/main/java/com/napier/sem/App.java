@@ -99,6 +99,7 @@ public class App {
         LanguagesQuery.LanguagesReport(con);
         PopulationLivingQuery.populationLivingReportQuery(con);
         PopulationSubsetCitiesQuery.populationCitiesInSubset(con);
+        TotalPopulationQueries.getTotalPopulations(con);
 
         /**
          * Disconnect from database
