@@ -25,7 +25,7 @@ public class CapitalCitiesQueries {
         /**
          * columns format
          */
-        String format = "%-40s %-20s";
+        String format = "%-40s %-40s %-20s";
 
         /**
          * report generation
@@ -91,6 +91,7 @@ public class CapitalCitiesQueries {
                     City capitalCity = new City();
 
                     capitalCity.setName(rset.getString("Name"));
+                    capitalCity.setCountry(rset.getString("Country"));
                     capitalCity.setPopulation(rset.getInt("Population"));
 
                     allCapitalCities.add(capitalCity);
@@ -133,6 +134,7 @@ public class CapitalCitiesQueries {
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
+                capitalCity.setCountry(rset.getString("Country"));
                 capitalCity.setPopulation(rset.getInt("Population"));
 
                 capitalCitiesInContinent.add(capitalCity);
@@ -174,6 +176,7 @@ public class CapitalCitiesQueries {
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
+                capitalCity.setCountry(rset.getString("Country"));
                 capitalCity.setPopulation(rset.getInt("Population"));
 
                 capitalCitiesInRegion.add(capitalCity);
@@ -218,6 +221,7 @@ public class CapitalCitiesQueries {
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
+                capitalCity.setCountry(rset.getString("Country"));
                 capitalCity.setPopulation(rset.getInt("Population"));
 
                 capitalCitiesLimited.add(capitalCity);
@@ -263,6 +267,7 @@ public class CapitalCitiesQueries {
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
+                capitalCity.setCountry(rset.getString("Country"));
                 capitalCity.setPopulation(rset.getInt("Population"));
 
                 capitalCitiesInContinentLimited.add(capitalCity);
@@ -308,6 +313,7 @@ public class CapitalCitiesQueries {
                 City capitalCity = new City();
 
                 capitalCity.setName(rset.getString("Name"));
+                capitalCity.setCountry(rset.getString("Country"));
                 capitalCity.setPopulation(rset.getInt("Population"));
 
                 capitalCitiesInRegionLimited.add(capitalCity);
@@ -326,7 +332,7 @@ public class CapitalCitiesQueries {
         System.out.println(String.format(header));
 
         System.out.println(String.format(format,
-                "Name", "Population"));
+                "Name", "Country", "Population"));
 
         /**
          * create a loop to print all capital cities in the list
@@ -340,6 +346,7 @@ public class CapitalCitiesQueries {
 
             System.out.println(String.format(format,
                     capital.getName(),
+                    capital.getCountry(),
                     capital.getPopulation()));
         }
     }
