@@ -10,16 +10,18 @@ public class City
      */
     public City() {}
 
-    public City(int id, String name, String countryCode, String district, int population) {
+    public City(int id, String name, String countryCode, String country, String district, int population) {
         this.id = id;
         this.name = name;
         this.countryCode = countryCode;
+        this.country = country;
         this.district = district;
         this.population = population;
     }
 
-    public City(String name, int population) {
+    public City(String name, String country, int population) {
         this.name = name;
+        this.country = country;
         this.population = population;
     }
 
