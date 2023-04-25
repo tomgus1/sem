@@ -56,28 +56,26 @@ public class CountriesQueries {
         );
     }
 
-    public static List<Country> getAllCountries(Connection con) {
-        //create list to hold data
-        List<Country> allCountries = new ArrayList<>();
+    public static ResultSet getSqlResults(Statement stmt, String query) {
+        //create a SQL statement
+        ResultSet rset = null;
 
-        try
-        {
-            //create a SQL statement
-            Statement stmt = con.createStatement();
+        try {
             //execute SQL statement
-            ResultSet rset = stmt.executeQuery(
-                    "SELECT country.Code AS 'Code'," +
-                            "country.Name AS 'Name'," +
-                            "country.Continent AS 'Continent'," +
-                            "country.Region AS 'Region'," +
-                            "country.Population AS 'Population'," +
-                            "country.Capital AS 'Capital'"
-                            + "FROM country "
-                            + "GROUP BY country.Code "
-                            + "ORDER BY country.Population DESC ");
+            rset = stmt.executeQuery(query);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to retrieve query details from database");
+        }
 
-            while (rset.next())
-            {
+        return rset;
+    }
+
+    public static List<Country> setResultToCountryList(ResultSet rset) {
+        List<Country> countries = new ArrayList<>();
+
+        try {
+            while (rset.next()) {
                 //map query result to country object and add to list
                 Country country = new Country();
 
@@ -88,23 +86,38 @@ public class CountriesQueries {
                 country.setPopulation(rset.getInt("Population"));
                 country.setCapital(rset.getString("Capital"));
 
-                allCountries.add(country);
+                countries.add(country);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to retrieve country details");
+            System.out.println("Failed to set country details to list");
         }
 
-        return allCountries;
+        return countries;
+    }
+
+    public static List<Country> getAllCountries(Connection con) {
+        Statement statement = Shared.CreateStatement(con);
+        String query = "SELECT country.Code AS 'Code'," +
+                "country.Name AS 'Name'," +
+                "country.Continent AS 'Continent'," +
+                "country.Region AS 'Region'," +
+                "country.Population AS 'Population'," +
+                "country.Capital AS 'Capital' " +
+                "FROM country " +
+                "GROUP BY country.Code " +
+                "ORDER BY country.Population DESC ";
+
+        ResultSet rset = getSqlResults(statement, query);
+
+        return setResultToCountryList(rset);
     }
 
     //use list of all countries to get countries in a continent
     public static List<Country> getCountriesInContinent(String continent, List<Country> countries) {
         List<Country> countriesInContinent = new ArrayList<>();
 
-        for (Country country:countries) {
+        for (Country country : countries) {
             if (country.getContinent().equals(continent)) {
                 countriesInContinent.add(country);
             }
@@ -117,7 +130,7 @@ public class CountriesQueries {
     public static List<Country> getCountriesInRegion(String region, List<Country> countries) {
         List<Country> countriesInRegion = new ArrayList<>();
 
-        for (Country country:countries) {
+        for (Country country : countries) {
             if (country.getRegion().equals(region)) {
                 countriesInRegion.add(country);
             }
@@ -149,8 +162,7 @@ public class CountriesQueries {
                 "Code", "Name", "Continent", "Region", "Population", "Capital"));
 
         // Loop over all countries in the list
-        for (Country country : list)
-        {
+        for (Country country : list) {
             if (country == null) {
                 System.out.println("Country is null");
                 continue;

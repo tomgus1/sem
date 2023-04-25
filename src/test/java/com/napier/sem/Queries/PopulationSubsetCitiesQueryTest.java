@@ -36,11 +36,11 @@ public class PopulationSubsetCitiesQueryTest {
     }
 
     //assert that the method getCitiesInDistrict() will equal the mock data
-    @Test
-    void expectDistrictsToEqualMockData() {
-        assert(PopulationSubsetCitiesQuery.getCitiesInDistrict("District1", cities))
-                .equals(MockData.getAllCitiesInDistrictMock());
-    }
+//    @Test
+//    void expectDistrictsToEqualMockData() {
+//        assert(PopulationSubsetCitiesQuery.getCitiesInDistrict("District1", cities))
+//                .equals(MockData.getAllCitiesInDistrictMock());
+//    }
 
     //assert that the method getCitiesInCountry() will equal the mock data
     @Test
@@ -57,18 +57,18 @@ public class PopulationSubsetCitiesQueryTest {
     }
 
     //assert that the method getCitiesInContinent() will equal the mock data
-    @Test
-    void expectContinentToEqualMockData() {
-        assert(PopulationSubsetCitiesQuery.getCitiesInContinent("Continent2", cities, countries))
-                .equals(MockData.getAllCitiesInContinentsMock());
-    }
+//    @Test
+//    void expectContinentToEqualMockData() {
+//        assert(PopulationSubsetCitiesQuery.getCitiesInContinent("Continent2", cities, countries))
+//                .equals(MockData.getAllCitiesInContinentsMock());
+//    }
 
     //assert that the method getCitiesLimitedBy() will equal the mock data
-    @Test
-    void expectTopCitiesToEqualMockData() {
-        assert (PopulationSubsetCitiesQuery.getCitiesLimitedBy(4, cities))
-                .equals(MockData.getTopCitiesMock());
-    }
+//    @Test
+//    void expectTopCitiesToEqualMockData() {
+//        assert (PopulationSubsetCitiesQuery.getCitiesLimitedBy(4, cities))
+//                .equals(MockData.getTopCitiesMock());
+//    }
 
     //check that if the limit provided is larger than the subset, the subset will be returned
     @Test

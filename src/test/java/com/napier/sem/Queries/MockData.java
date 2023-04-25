@@ -5,6 +5,7 @@ import com.napier.sem.Country;
 import com.napier.sem.Language;
 import com.napier.sem.Population;
 
+import java.sql.ResultSet;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,10 +17,15 @@ public class MockData {
     static Country mockCountry3 = new Country("GHI", "Country3", "Continent2", "Region2", 30, "Capital3");
     static Country mockCountry4 = new Country("JKL", "Country4", "Continent2", "Region2", 5, "Capital4");
     static Country mockCountry5 = new Country("MNO", "Country5", "Continent2", "Region2", 15, "Capital5");
+    static Country actualFirstCountry = new Country("CHN","China","Asia","Eastern Asia",1277558000,"1891");
     static List<Country> allCountriesMock = Arrays.asList(mockCountry3, mockCountry1, mockCountry5, mockCountry2, mockCountry4);
     static List<Country> allContinentsMock = Arrays.asList(mockCountry3, mockCountry5, mockCountry4);
     static List<Country> allRegionsMock = Arrays.asList(mockCountry3, mockCountry5, mockCountry4);
     static List<Country> topCountriesMock = Arrays.asList(mockCountry3, mockCountry1, mockCountry5);
+
+    public static Country getFirstCountry() {
+        return actualFirstCountry;
+    }
 
     public static List<Country> getAllCountries() {
         return allCountriesMock;
