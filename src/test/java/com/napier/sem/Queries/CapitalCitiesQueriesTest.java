@@ -16,11 +16,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CapitalCitiesQueriesTest {
 
-    //the list of all the capital cities (mock data)
+    /**
+     * the list of all the capital cities (mock data)
+     */
     List<City> capitalCity = MockData.getAllCapitalCities();
-
-    private final String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
-    private final String lineEnd = os.startsWith("win") ? "\r\n" : "\n";
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
@@ -34,54 +33,20 @@ public class CapitalCitiesQueriesTest {
         System.setOut(originalOut);
     }
 
-    //assert that the method getCapitalCitiesInContinent() will equal the mock data
-//    @Test
-//    void expectContinentsToEqualMockData() {
-//        assert (CapitalCitiesQueries.getCapitalCitiesInContinent("Continent3"))
-//                .equals(MockData.getCapitalCitiesInContinentMock());
-//    }
-
-//    assert that the method getCapitalCitiesInRegion() will equal the mock data
-//    @Test
-//    void expectRegionsToEqualMockData() {
-//        assert (CapitalCitiesQueries.getCapitalCitiesInRegion("Region2"))
-//                .equals(MockData.getCapitalCitiesInRegionMock());
-//    }
-
-//    assert that the method getCapitalCitiesLimitedBy() will equal the mock data
-//    @Test
-//    void expectTopCapitalCitiesToEqualMockData() {
-//        assert (CapitalCitiesQueries.getCapitalCitiesLimitedBy(3, capitalCity))
-//                .equals(MockData.getTopCapitalCitiesMock());
-//    }
-
-//    assert that report generation is as expected
+    /**
+     * assert that report generation is as expected
+     */
     @Test
     void expectReportToEqualMockData() {
         CapitalCitiesQueries.printReport("Header", "%-40s %-20s", capitalCity);
-        String dataString = "Header" + lineEnd +
-                "Name                                     Population          " + lineEnd +
-                "Capital3                                 30                  " + lineEnd +
-                "Capital1                                 20                  " + lineEnd +
-                "Capital5                                 15                  " + lineEnd +
-                "Capital2                                 10                  " + lineEnd +
-                "Capital4                                 5                   " + lineEnd;
-        assertEquals(dataString, outContent.toString());
+        String dataString = "Header\n" +
+                "Name                                     Country             \n" +
+                "Capital3                                 Country3            \n" +
+                "Capital1                                 Country1            \n" +
+                "Capital5                                 Country5            \n" +
+                "Capital2                                 Country2            \n" +
+                "Capital4                                 Country4            \n";
+        String regex = "[\\r\\n]";
+        assertEquals(dataString.replaceAll(regex, " "), outContent.toString().replaceAll(regex, " "));
     }
-
-//    check that if a subset of capital cities is provided that doesn't exist, an empty report will be provided
-//    @Test
-//    void expectReportToBeBlank() {
-//        CapitalCitiesQueries.printReport("Header", "%-40s %-20s", CapitalCitiesQueries.getCapitalCitiesInContinent("Random", this.capitalCity));
-//        String dataString = "Header" + lineEnd +
-//                "Name                                     Population          " + lineEnd;
-//        assertEquals(dataString, outContent.toString());
-//    }
-
-//    check that if the limit provided is larger than the subset, the subset will be returned
-//    @Test
-//    void expectTopContinentsWithHighLimitToEqualMockData() {
-//        assert (CapitalCitiesQueries.getCapitalCitiesLimitedBy(10, MockData.getCapitalCitiesInContinentMock()))
-//                .equals(MockData.getCapitalCitiesInContinentMock());
-//    }
 }
