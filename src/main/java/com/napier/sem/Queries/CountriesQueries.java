@@ -9,21 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CountriesQueries {
-
-    //todo, add user input for continent, region, limit
-    public static void getAllCountryReports(Connection con, int limitBy) {
-        //get country data
+    /**
+     * get all the country reports
+     */
+    public static void getAllCountryReports(Connection con, int limitBy, String region, String continent) {
         List<Country> allCountries = getAllCountries(con);
-        List<Country> countriesInContinent = getCountriesInContinent("Europe", allCountries);
-        List<Country> countriesInRegion = getCountriesInRegion("Eastern Asia", allCountries);
+        List<Country> countriesInContinent = getCountriesInContinent(continent, allCountries);
+        List<Country> countriesInRegion = getCountriesInRegion(region, allCountries);
         List<Country> allCountriesLimited = getCountriesLimitedBy(limitBy, allCountries);
         List<Country> countriesInContinentLimited = getCountriesLimitedBy(limitBy, countriesInContinent);
         List<Country> countriesInRegionLimited = getCountriesLimitedBy(limitBy, countriesInRegion);
 
-        //columns format
         String format = "%-10s %-50s %-20s %-40s %-15s %-15s";
 
-        //report generation
         printReport(
                 "All the countries in the world organised by largest population to smallest",
                 format,
@@ -56,6 +54,9 @@ public class CountriesQueries {
         );
     }
 
+    /**
+     * the method takes a query and sql statement
+     */
     public static ResultSet getSqlResults(Statement stmt, String query) {
         //create a SQL statement
         ResultSet rset = null;
@@ -71,6 +72,9 @@ public class CountriesQueries {
         return rset;
     }
 
+    /**
+     * the method that sets the result to a list
+     */
     public static List<Country> setResultToCountryList(ResultSet rset) {
         List<Country> countries = new ArrayList<>();
 
@@ -96,6 +100,9 @@ public class CountriesQueries {
         return countries;
     }
 
+    /**
+     * first, do one sql query to get the list of all countries ordered by population
+     */
     public static List<Country> getAllCountries(Connection con) {
         Statement statement = Shared.CreateStatement(con);
         String query = "SELECT country.Code AS 'Code'," +
@@ -113,7 +120,9 @@ public class CountriesQueries {
         return setResultToCountryList(rset);
     }
 
-    //use list of all countries to get countries in a continent
+    /**
+     * use list of all countries to get countries in a continent
+     */
     public static List<Country> getCountriesInContinent(String continent, List<Country> countries) {
         List<Country> countriesInContinent = new ArrayList<>();
 
@@ -126,7 +135,9 @@ public class CountriesQueries {
         return countriesInContinent;
     }
 
-    //use list of all countries to get countries in a region
+    /**
+     * use list of all countries to get countries in a region
+     */
     public static List<Country> getCountriesInRegion(String region, List<Country> countries) {
         List<Country> countriesInRegion = new ArrayList<>();
 
@@ -139,7 +150,9 @@ public class CountriesQueries {
         return countriesInRegion;
     }
 
-    //use list to get top n countries to be specified by user
+    /**
+     * use list to get top n countries to be specified by user
+     */
     public static List<Country> getCountriesLimitedBy(int limit, List<Country> countries) {
         List<Country> countriesLimited = new ArrayList<>();
 
@@ -154,7 +167,9 @@ public class CountriesQueries {
         return countriesLimited;
     }
 
-    //method to print a report from a list
+    /**
+     * method to print a report from a list
+     */
     public static void printReport(String header, String format, List<Country> list) {
         System.out.println(String.format(header));
 

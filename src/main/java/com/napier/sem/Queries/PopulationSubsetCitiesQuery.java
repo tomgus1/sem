@@ -10,14 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PopulationSubsetCitiesQuery {
-    //get city data
-    public static void populationCitiesInSubset (Connection con, int limitBy){
+    /**
+     * get city data
+     */
+    public static void populationCitiesInSubset(Connection con, int limitBy, String region, String continent, String country, String district) {
         List<City> allCities = getAllCities(con);
         List<Country> allCountries = CountriesQueries.getAllCountries(con);
-        List<City> citiesInDistrict = getCitiesInDistrict("England", allCities);
-        List<City> citiesInCountry = getCitiesInCountry("Germany", allCities, allCountries);
-        List<City> citiesInRegion = getCitiesInRegion("Eastern Asia", allCities, allCountries);
-        List<City> citiesInContinent = getCitiesInContinent("Europe", allCities, allCountries);
+        List<City> citiesInDistrict = getCitiesInDistrict(district, allCities);
+        List<City> citiesInCountry = getCitiesInCountry(country, allCities, allCountries);
+        List<City> citiesInRegion = getCitiesInRegion(region, allCities, allCountries);
+        List<City> citiesInContinent = getCitiesInContinent(continent, allCities, allCountries);
         List<City> allCitiesLimited = getCitiesLimitedBy(limitBy, allCities);
         List<City> citiesInDistrictLimited = getCitiesLimitedBy(limitBy, citiesInDistrict);
         List<City> citiesInCountryLimited = getCitiesLimitedBy(limitBy, citiesInCountry);
@@ -71,14 +73,16 @@ public class PopulationSubsetCitiesQuery {
 
     }
 
+    /**
+     * get all city data from one sql query
+     */
     public static List<City> getAllCities(Connection con) {
         //create list to hold data
         List<City> allCities = new ArrayList<>();
 
-        try
-        {
+        try {
             //create a SQL statement
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
             //execute SQL statement
             ResultSet rset = stmt.executeQuery(
                     "SELECT city.CountryCode AS CountryCode, "
@@ -90,8 +94,7 @@ public class PopulationSubsetCitiesQuery {
                             + "LEFT JOIN country country on city.CountryCode = country.Code "
                             + "ORDER BY city.Population DESC ");
 
-            while (rset.next())
-            {
+            while (rset.next()) {
                 //map query result to country object and add to list
                 City city = new City();
 
@@ -103,9 +106,7 @@ public class PopulationSubsetCitiesQuery {
 
                 allCities.add(city);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to retrieve city details");
         }
@@ -113,11 +114,13 @@ public class PopulationSubsetCitiesQuery {
         return allCities;
     }
 
-    //use list of all cities to get cities in a district
+    /**
+     * use list of all cities to get cities in a district
+     */
     public static List<City> getCitiesInDistrict(String district, List<City> cities) {
         List<City> citiesInDistrict = new ArrayList<>();
 
-        for (City city:cities) {
+        for (City city : cities) {
             if (city.getDistrict().equals(district)) {
                 citiesInDistrict.add(city);
             }
@@ -125,17 +128,20 @@ public class PopulationSubsetCitiesQuery {
 
         return citiesInDistrict;
     }
-    //use list of all cities/countries to get cities in a country
+
+    /**
+     * use list of all cities/countries to get cities in a country
+     */
     public static List<City> getCitiesInCountry(String country, List<City> cities, List<Country> countries) {
         List<City> citiesInCountry = new ArrayList<>();
         String countryCode = "";
-        for (Country c:countries){
-            if (c.getName().equals(country)){
+        for (Country c : countries) {
+            if (c.getName().equals(country)) {
                 countryCode = c.getCode();
             }
         }
 
-        for (City city:cities) {
+        for (City city : cities) {
             if (city.getCountryCode().equals(countryCode)) {
                 citiesInCountry.add(city);
             }
@@ -143,18 +149,21 @@ public class PopulationSubsetCitiesQuery {
 
         return citiesInCountry;
     }
-    //use list of all cities/countries to get cities in a region
+
+    /**
+     * use list of all cities/countries to get cities in a region
+     */
     public static List<City> getCitiesInRegion(String region, List<City> cities, List<Country> countries) {
         List<City> citiesInRegion = new ArrayList<>();
         List<Country> countriesInRegion = CountriesQueries.getCountriesInRegion(region, countries);
         List<String> countryCodes = new ArrayList<>();
 
-        for (Country c:countriesInRegion){
+        for (Country c : countriesInRegion) {
             countryCodes.add(c.getCode());
         }
 
-        for (City city:cities) {
-            for (String code: countryCodes) {
+        for (City city : cities) {
+            for (String code : countryCodes) {
                 if (city.getCountryCode().equals(code)) {
                     citiesInRegion.add(city);
                 }
@@ -163,18 +172,21 @@ public class PopulationSubsetCitiesQuery {
 
         return citiesInRegion;
     }
-    //use list of all cities/countries to get cities in a region
+
+    /**
+     * use list of all cities/countries to get cities in a region
+     */
     public static List<City> getCitiesInContinent(String continent, List<City> cities, List<Country> countries) {
         List<City> citiesInContinent = new ArrayList<>();
         List<Country> countriesInContinent = CountriesQueries.getCountriesInContinent(continent, countries);
         List<String> countryCodes = new ArrayList<>();
 
-        for (Country c:countriesInContinent){
+        for (Country c : countriesInContinent) {
             countryCodes.add(c.getCode());
         }
 
-        for (City city:cities) {
-            for (String code: countryCodes) {
+        for (City city : cities) {
+            for (String code : countryCodes) {
                 if (city.getCountryCode().equals(code)) {
                     citiesInContinent.add(city);
                 }
@@ -184,23 +196,26 @@ public class PopulationSubsetCitiesQuery {
         return citiesInContinent;
     }
 
-    //use list to get top n cities
-    public static List<City> getCitiesLimitedBy(int limit, List<City> cities){
+    /**
+     * use list to get top n cities
+     */
+    public static List<City> getCitiesLimitedBy(int limit, List<City> cities) {
         List<City> citiesLimited = new ArrayList<>();
 
         if (limit > cities.size()) {
             limit = cities.size();
         }
 
-        for (int i=0; i < limit; i++){
+        for (int i = 0; i < limit; i++) {
             citiesLimited.add(cities.get(i));
         }
 
         return citiesLimited;
     }
 
-
-    //method to print a report from a list
+    /**
+     * method to print a report from a list
+     */
     public static void printReport(String header, String format, List<City> list) {
         System.out.println(String.format(header));
 
@@ -208,8 +223,7 @@ public class PopulationSubsetCitiesQuery {
                 "Name", "Country", "District", "Population"));
 
         // Loop over all countries in the list
-        for (City city : list)
-        {
+        for (City city : list) {
             if (city == null) {
                 System.out.println("City is null");
                 continue;

@@ -67,15 +67,10 @@ public class App {
                 con.close();
             } catch (Exception e) /**
              * Catching an exception
-             */
-            {
+             */ {
                 System.out.println("Error closing connection to database");
             }
         }
-    }
-
-    public static Connection getCon(){
-        return con;
     }
 
     public static void main(String[] args) {
@@ -86,22 +81,42 @@ public class App {
         /**
          * Connect to database
          */
-        if(args.length < 1){
+        if (args.length < 1) {
             con = a.connect("localhost:33060");
-        }else{
+        } else {
             con = a.connect(args[0]);
         }
+
         /**
-        * Calls queries from respective files
          * mocks a user input for "limit by N" queries
-        */
+         * mocks a user input for "region"
+         * mocks a user input for "continent", etc
+         * in the real app, these would simply be integrated with a front end input for the user
+         */
         int limitBy = 3;
-        CapitalCitiesQueries.getAllCapitalCityReports(con, limitBy);
-        CountriesQueries.getAllCountryReports(con, limitBy);
+        String continent = "Europe";
+        String region = "Eastern Asia";
+        String country = "Germany";
+        String district = "England";
+        String city = "London";
+
+        /**
+         * mock check "n not less than 1"
+         * but should do this check on the front end form for fast fail
+         */
+        if (limitBy < 1) {
+            throw new NullPointerException("N must be an integer greater than 0");
+        }
+
+        /**
+         * Calls queries from respective files
+         */
+        CapitalCitiesQueries.getAllCapitalCityReports(con, limitBy, region, continent);
+        CountriesQueries.getAllCountryReports(con, limitBy, region, continent);
         LanguagesQuery.LanguagesReport(con);
         PopulationLivingQuery.populationLivingReportQuery(con);
-        PopulationSubsetCitiesQuery.populationCitiesInSubset(con, limitBy);
-        TotalPopulationQueries.getTotalPopulations(con);
+        PopulationSubsetCitiesQuery.populationCitiesInSubset(con, limitBy, region, continent, country, district);
+        TotalPopulationQueries.getTotalPopulations(con, region, continent, country, district, city);
 
         /**
          * Disconnect from database

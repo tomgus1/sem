@@ -37,12 +37,14 @@ public class LanguagesQuery {
             /**
              * Create an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
             /**
              * Execute SQL statement
              */
             ResultSet rset = stmt.executeQuery(
-                    "SELECT countrylanguage.Language AS 'Language', (SUM((country.Population * countrylanguage.Percentage) / 100)) AS 'Population', (((SUM((country.Population * countrylanguage.Percentage) / 100)) * 100) / (SELECT SUM(country.Population) FROM country)) AS 'PercentageGlobal' "
+                    "SELECT countrylanguage.Language AS 'Language', " +
+                            "(SUM((country.Population * countrylanguage.Percentage) / 100)) AS 'Population', " +
+                            "(((SUM((country.Population * countrylanguage.Percentage) / 100)) * 100) / (SELECT SUM(country.Population) FROM country)) AS 'PercentageGlobal' "
                             + "FROM countrylanguage, country "
                             + "WHERE (countrylanguage.Language = 'Chinese' "
                             + "OR countrylanguage.Language = 'English' "
