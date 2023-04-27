@@ -14,11 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
     public class LanguageQueryTest {
 
-        //the list of all the languages (mock data)
+        /**
+         * the list of all the languages (mock data)
+         */
         List<Language> languages = MockData.getAllLanguages();
-
-        private final String os = System.getProperty("os.name").toLowerCase(Locale.ENGLISH);
-        private final String lineEnd = os.startsWith("win") ? "\r\n" : "\n";
         private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         private final PrintStream originalOut = System.out;
 
@@ -32,18 +31,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
             System.setOut(originalOut);
         }
 
-        //assert that report generation is as expected
+        /**
+         * assert that report generation is as expected
+         */
         @Test
         void expectReportToEqualMockData() {
             LanguagesQuery.printReport("Header", "%-10s %-15s %-20s", languages);
-            String dataString = "Header" + lineEnd +
-            "Language   Speakers        % Worldwide Speakers" + lineEnd +
-            "Chinese    1191843539      19.61               " + lineEnd +
-            "Hindi      405633070       6.67                " + lineEnd +
-            "Spanish    355029462       5.84                " + lineEnd +
-            "English    347077867       5.71                " + lineEnd +
-            "Arabic     233839238       3.85                " + lineEnd;
-            assertEquals(dataString, outContent.toString());
+            String dataString = "Header\n" +
+                    "Language   Speakers        % Worldwide Speakers\n" +
+                    "Chinese    1191843539      19.61               \n" +
+                    "Hindi      405633070       6.67                \n" +
+                    "Spanish    355029462       5.84                \n" +
+                    "English    347077867       5.71                \n" +
+                    "Arabic     233839238       3.85                \n";
+            String regex = "[\\r\\n]";
+            assertEquals(dataString.replaceAll(regex, " "), outContent.toString().replaceAll(regex, " "));
         }
     }
 

@@ -7,16 +7,22 @@ import java.sql.Statement;
 
 public class TotalPopulationQueries {
 
-    public static void getTotalPopulations(Connection con){
+    /**
+     * get total population data
+     */
+    public static void getTotalPopulations(Connection con, String region, String continent, String country, String district, String city){
         getPopulationWorld(con);
-        getPopulationRegion("Eastern Asia", con);
-        getPopulationContinent("Europe", con);
-        getPopulationCountry("Germany", con);
-        getPopulationDistrict("England", con);
-        getPopulationCity("London", con);
+        getPopulationRegion(region, con);
+        getPopulationContinent(continent, con);
+        getPopulationCountry(country, con);
+        getPopulationDistrict(district, con);
+        getPopulationCity(city, con);
 
     }
 
+    /**
+     * get world population data
+     */
     public static void getPopulationWorld (Connection con){
         long population = 0;
         try
@@ -40,6 +46,9 @@ public class TotalPopulationQueries {
         }
         System.out.println("World Population: " + population);
     }
+    /**
+     * get population data for continent
+     */
     public static void getPopulationContinent (String name, Connection con){
         long population = 0;
         try
@@ -67,6 +76,9 @@ public class TotalPopulationQueries {
         }
         System.out.println("Population of " + name + ": "+ population);
     }
+    /**
+     * get population data for region
+     */
     public static void getPopulationRegion (String name, Connection con){
         long population = 0;
         try
@@ -94,6 +106,9 @@ public class TotalPopulationQueries {
         }
         System.out.println("Population of " + name + ": "+ population);
     }
+    /**
+     * get population data for country
+     */
     public static void getPopulationCountry (String name, Connection con){
         long population = 0;
         try
@@ -120,6 +135,9 @@ public class TotalPopulationQueries {
         }
         System.out.println("Population of " + name + ": "+ population);
     }
+    /**
+     * get population data for district
+     */
     public static void getPopulationDistrict (String name, Connection con){
         long population = 0;
         try
@@ -147,6 +165,9 @@ public class TotalPopulationQueries {
         }
         System.out.println("Population of " + name + ": "+ population);
     }
+    /**
+     * get population data for city
+     */
     public static void getPopulationCity (String name, Connection con){
         long population = 0;
         try
