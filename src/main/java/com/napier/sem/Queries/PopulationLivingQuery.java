@@ -10,17 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PopulationLivingQuery {
+    /**
+     * get population data
+     */
     public static void populationLivingReportQuery(Connection con) {
-        /**
-         * get population data
-         */
+
         List<Population> populationCountry = getPopulationLivingCountry(con);
         List<Population> populationContinent = getPopulationLivingContinent(con);
         List<Population> populationRegion = getPopulationLivingRegion(con);
 
-        /**
-         * columns format
-         */
         String format = "%-40s %-20s %-25s %-25s %-25s %-25s";
 
         printReport(
@@ -54,12 +52,14 @@ public class PopulationLivingQuery {
             /**
              * Create an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * Execute SQL statement
              */
-            ResultSet rset = stmt.executeQuery("SELECT country.name AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
+            ResultSet rset = stmt.executeQuery("SELECT country.name AS 'Name', " +
+                    "SUM(DISTINCT country.population) AS 'CountryPopulation', " +
+                    "SUM(city.population) AS 'CityPopulation' "
                     + "FROM city JOIN country ON city.CountryCode = country.Code "
                     + "GROUP BY country.name ");
 
@@ -106,12 +106,14 @@ public class PopulationLivingQuery {
             /**
              * Create an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * Execute SQL statement
              */
-            ResultSet rset = stmt.executeQuery( "SELECT country.continent AS 'Name', SUM(DISTINCT country.population) AS 'CountryPopulation', SUM(city.population) AS 'CityPopulation' "
+            ResultSet rset = stmt.executeQuery( "SELECT country.continent AS 'Name', " +
+                    "SUM(DISTINCT country.population) AS 'CountryPopulation', " +
+                    "SUM(city.population) AS 'CityPopulation' "
                     + "FROM city JOIN country ON city.CountryCode = country.Code " +
                     "GROUP BY country.continent");
 
@@ -159,7 +161,7 @@ public class PopulationLivingQuery {
             /**
              * Create an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * Execute SQL statement

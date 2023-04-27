@@ -10,17 +10,17 @@ import java.util.List;
 
 public class CapitalCitiesQueries {
 
-    public static void getAllCapitalCityReports(Connection con, int limitBy) {
+    public static void getAllCapitalCityReports(Connection con, int limitBy, String region, String continent) {
 
         /**
          * get capital city data
          */
         List<City> allCapitalCities = getAllCapitalCities(con);
-        List<City> capitalCitiesInContinent = getCapitalCitiesInContinent("Europe", con);
-        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion("Eastern Asia", con);
+        List<City> capitalCitiesInContinent = getCapitalCitiesInContinent(continent, con);
+        List<City> capitalCitiesInRegion = getCapitalCitiesInRegion(region, con);
         List<City> allCapitalCitiesLimited = getCapitalCitiesLimitedBy(limitBy, con);
-        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(limitBy, "Europe", con);
-        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(limitBy, "Eastern Asia", con);
+        List<City> capitalCitiesInContinentLimited = getCapitalCitiesInContinentLimitedBy(limitBy, continent, con);
+        List<City> capitalCitiesInRegionLimited = getCapitalCitiesInRegionLimitedBy(limitBy, region, con);
 
         /**
          * columns format
@@ -73,7 +73,7 @@ public class CapitalCitiesQueries {
                 /**
                  * creates an SQL statement
                  */
-                Statement stmt = con.createStatement();
+                Statement stmt = Shared.CreateStatement(con);
 
                 /**
                  * sends SQL statement to the database
@@ -115,7 +115,7 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * sends SQL statement to the database
@@ -157,7 +157,7 @@ public class CapitalCitiesQueries {
             /**
              * creates an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * sends SQL statement to the database
@@ -194,15 +194,11 @@ public class CapitalCitiesQueries {
     public static List<City> getCapitalCitiesLimitedBy(int n, Connection con) {
         List<City> capitalCitiesLimited = new ArrayList<>();
 
-        if (n < 1) {
-            throw new NullPointerException("N must be greater than 0");
-        }
-
         try {
             /**
              * creates an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * sends the SQL statement to the database
@@ -239,15 +235,11 @@ public class CapitalCitiesQueries {
     public static List<City> getCapitalCitiesInContinentLimitedBy(int n, String continent, Connection con) {
         List<City> capitalCitiesInContinentLimited = new ArrayList<>();
 
-        if (n < 1) {
-            throw new NullPointerException("N must be greater than 0");
-        }
-
         try {
             /**
              * creates an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * sends the SQL statement to the database
@@ -285,15 +277,11 @@ public class CapitalCitiesQueries {
     public static List<City> getCapitalCitiesInRegionLimitedBy(int n, String region, Connection con) {
         List<City> capitalCitiesInRegionLimited = new ArrayList<>();
 
-        if (n < 1) {
-            throw new NullPointerException("N must be greater than 0");
-        }
-
         try {
             /**
              * creates an SQL statement
              */
-            Statement stmt = con.createStatement();
+            Statement stmt = Shared.CreateStatement(con);
 
             /**
              * sends SQL statement to the database

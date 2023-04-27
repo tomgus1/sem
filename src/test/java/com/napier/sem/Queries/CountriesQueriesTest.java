@@ -11,9 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CountriesQueriesTest {
 
-    //the list of all the countries (mock data)
+    /**
+     * the list of all the countries (mock data)
+     */
     List<Country> countries = MockData.getAllCountries();
-
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final String regex = "[\\r\\n]";
@@ -28,28 +29,36 @@ public class CountriesQueriesTest {
         System.setOut(originalOut);
     }
 
-    //assert that the method getCountriesInContinent() will equal the mock data
+    /**
+     * assert that the method getCountriesInContinent() will equal the mock data
+     */
     @Test
     void expectContinentsToEqualMockData() {
         assert(CountriesQueries.getCountriesInContinent("Continent2", countries))
                 .equals(MockData.getAllContinentsMock());
     }
 
-    //assert that the method getCountriesInRegion() will equal the mock data
+    /**
+     assert that the method getCountriesInRegion() will equal the mock data
+     */
     @Test
     void expectRegionsToEqualMockData() {
         assert(CountriesQueries.getCountriesInRegion("Region2", countries))
                 .equals(MockData.getAllRegionsMock());
     }
 
-    //assert that the method getCountriesLimitedBy() will equal the mock data
+    /**
+     assert that the method getCountriesLimitedBy() will equal the mock data
+     */
     @Test
     void expectTopCountriesToEqualMockData() {
         assert (CountriesQueries.getCountriesLimitedBy(3, countries))
                 .equals(MockData.getTopCountriesMock());
     }
 
-    //assert that report generation is as expected
+    /**
+     assert that report generation is as expected
+     */
     @Test
     void expectReportToEqualMockData() {
         CountriesQueries.printReport("Header", "%-10s %-50s %-20s %-40s %-15s %-15s", countries);
@@ -63,7 +72,9 @@ public class CountriesQueriesTest {
         assertEquals(dataString.replaceAll(regex, " "), outContent.toString().replaceAll(regex, " "));
     }
 
-    //check that if a subset of countries is provided that doesn't exist, an empty report will be provided
+    /**
+     check that if a subset of countries is provided that doesn't exist, an empty report will be provided
+     */
     @Test
     void expectReportToBeBlank() {
         CountriesQueries.printReport("Header", "%-10s %-50s %-20s %-40s %-15s %-15s", CountriesQueries.getCountriesInContinent("Random", this.countries));
@@ -72,7 +83,9 @@ public class CountriesQueriesTest {
         assertEquals(dataString.replaceAll(regex, " "), outContent.toString().replaceAll(regex, " "));
     }
 
-    //check that if the limit provided is larger than the subset, the subset will be returned
+    /**
+     //check that if the limit provided is larger than the subset, the subset will be returned
+     */
     @Test
     void expectTopContinentsWithHighLimitToEqualMockData() {
         assert (CountriesQueries.getCountriesLimitedBy(10, MockData.getAllContinentsMock()))
