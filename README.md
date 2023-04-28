@@ -31,7 +31,8 @@
 
 ## Query Results
 #### 32/32 Reports Complete
-
+| ID  |                                                                              Report                                                                              | Met |                 Output                  |
+|:---:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---:|:---------------------------------------:|
 |  1  |               [All the countries in the world organised by largest population to smallest](https://github.com/tomgus1/sem/issues/15)               | Yes |  ![Result1](./screenshots/OUTPUT1.png)  
 |  2  |          [All the countries in a continent organised by largest population to smallest](https://github.com/tomgus1/sem/issues/15)           | Yes |  ![Result2](./screenshots/OUTPUT2.png)  |
 |  3  |         [All the countries in a region organised by largest population to smallest](https://github.com/tomgus1/sem/issues/15)          | Yes |  ![Result3](./screenshots/OUTPUT3.png)  |
