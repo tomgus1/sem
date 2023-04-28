@@ -1,0 +1,45 @@
+name: Issue Form
+description: File a report
+title: "[Report]: "
+labels: ["bug", "enhancement"]
+assignees:
+  - FMulligan
+  - tiphainetiphaine
+  - MxmIv
+  - tomgus1
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your time to fill out this report!
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. me@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Message
+      description: Do you have a recommendation? Or do you  want to fina bug?
+      placeholder: What has happened?
+      value: "Tell us!"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/tomgus1/sem/blob/master/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow Code of Conduct of the project!
+          required: true
